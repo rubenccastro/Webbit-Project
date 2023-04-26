@@ -6,7 +6,7 @@ USE Webbit;
 
 CREATE TABLE Roles (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  role VARCHAR(255) NOT NULL
+  role VARCHAR(256) NOT NULL
 ); 
 
 INSERT INTO `roles`(`id`, `role`) VALUES ('1','Member');
@@ -14,14 +14,13 @@ INSERT INTO `roles`(`id`, `role`) VALUES ('1','Member');
 CREATE TABLE Users (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(16) NOT NULL UNIQUE,
-  pwd VARCHAR(16) NOT NULL,
-  email VARCHAR(255) NOT NULL,
+  pwd VARCHAR(256) NOT NULL,
+  email VARCHAR(256) NOT NULL,
   karmapoints INT NOT NULL DEFAULT 0,
-  description VARCHAR(255) NULL,
-  country VARCHAR(255) NULL,
+  description VARCHAR(256) NULL,
+  country VARCHAR(256) NULL,
   role_id INT NOT NULL DEFAULT 1,
-  created_in DATETIME NOT NULL,
-  updated_in DATETIME NOT NULL,
+  created_in DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (role_id) REFERENCES Roles(id)
 ); 
 
@@ -37,6 +36,7 @@ CREATE TABLE Posts (
   user_id INT NOT NULL,
   karmapoints INT NULL,
   category_id INT NOT NULL,
+  created_in DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES Users(id),
   FOREIGN KEY (category_id) REFERENCES Category(id)
 ); 
@@ -47,8 +47,7 @@ CREATE TABLE Comments (
   karmapoints INT NULL,
   user_id INT NOT NULL,
   post_id INT NOT NULL,
-  created_in DATETIME NOT NULL,
-  updated_in DATETIME NOT NULL,
+  created_in DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES Users(id),
   FOREIGN KEY (post_id) REFERENCES Posts(id)
 ); 
