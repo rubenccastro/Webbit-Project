@@ -1,0 +1,41 @@
+.form-size {
+    border-radius: 50px !important;
+    height: 40px !important;
+    outline: 0 !important;
+    border: 0px !important;
+    width: 50% !important;
+}
+
+.text-size {
+    line-height: 1px !important;
+    font-size: 14px !important;
+    color: rgb(122, 122, 122);
+}
+
+.form-size:focus {
+    outline: 0 !important;
+}
+
+.form-size:active {
+    outline: 0 !important;
+}
+
+.form-control:focus {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.text-size::after {
+    background-color: transparent !important;
+}
+
+.linksignup {
+    color: #FF6A29 !important;
+    text-decoration: none !important;
+    font-weight: 450;
+}
+
+.linksignup:hover {
+    color: #fa5007 !important;
+    text-decoration: none !important;
+}

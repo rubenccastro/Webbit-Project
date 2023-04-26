@@ -1,0 +1,50 @@
+DROP DATABASE IF EXISTS Webbit;
+
+CREATE DATABASE Webbit;
+
+USE Webbit;
+
+CREATE TABLE Roles (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  role VARCHAR(255) NOT NULL
+); 
+
+CREATE TABLE Users (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  user VARCHAR(16) NOT NULL UNIQUE,
+  password VARCHAR(16) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  karmapoints INT NULL,
+  description VARCHAR(255) NULL,
+  country VARCHAR(255) NULL,
+  role_id INT NOT NULL,
+  FOREIGN KEY (role_id) REFERENCES Roles(id)
+); 
+
+CREATE TABLE Category (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(16) NOT NULL,
+); 
+
+CREATE TABLE Posts (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(50) NOT NULL,
+  text LONGTEXT NOT NULL,
+  user_id INT NOT NULL,
+  karmapoints INT NULL,
+  category_id INT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES Users(id),
+  FOREIGN KEY (category_id) REFERENCES Category(id)
+); 
+
+CREATE TABLE Comments (
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  text LONGTEXT NOT NULL,
+  karmapoints INT NULL,
+  user_id INT NOT NULL,
+  post_id INT NOT NULL,
+  created_in DATETIME NOT NULL,
+  updated_in DATETIME NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES Users(id),
+  FOREIGN KEY (post_id) REFERENCES Posts(id)
+); 
