@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2023 at 06:13 PM
+-- Generation Time: Apr 26, 2023 at 02:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,8 +44,7 @@ CREATE TABLE `comments` (
   `karmapoints` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `post_id` int(11) NOT NULL,
-  `created_in` datetime NOT NULL,
-  `updated_in` datetime NOT NULL
+  `created_in` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -57,10 +56,11 @@ CREATE TABLE `comments` (
 CREATE TABLE `posts` (
   `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
-  `text` text NOT NULL,
+  `text` longtext NOT NULL,
   `user_id` int(11) NOT NULL,
   `karmapoints` int(11) DEFAULT NULL,
-  `category_id` int(11) NOT NULL
+  `category_id` int(11) NOT NULL,
+  `created_in` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -71,8 +71,15 @@ CREATE TABLE `posts` (
 
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
-  `role` varchar(255) NOT NULL
+  `role` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role`) VALUES
+(1, 'Member');
 
 -- --------------------------------------------------------
 
@@ -82,14 +89,22 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `user` varchar(16) NOT NULL,
-  `password` varchar(16) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `karmapoints` int(11) DEFAULT NULL,
-  `description` varchar(255) DEFAULT NULL,
-  `country` varchar(255) DEFAULT NULL,
-  `role_id` int(11) NOT NULL
+  `username` varchar(16) NOT NULL,
+  `pwd` varchar(256) NOT NULL,
+  `email` varchar(256) NOT NULL,
+  `karmapoints` int(11) NOT NULL DEFAULT 0,
+  `description` varchar(256) DEFAULT NULL,
+  `country` varchar(256) DEFAULT NULL,
+  `role_id` int(11) NOT NULL DEFAULT 1,
+  `created_in` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `pwd`, `email`, `karmapoints`, `description`, `country`, `role_id`, `created_in`) VALUES
+(1, 'testefilipe', '$2y$10$3bPA.VF2vzwU2f/JLDUr2e2WJIbn48H71.TUf.aBb9zoLzxneDlxy', 'testefilipe@teste.com', 0, NULL, NULL, 1, '2023-04-26 12:57:31');
 
 --
 -- Indexes for dumped tables
@@ -128,7 +143,7 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `user` (`user`),
+  ADD UNIQUE KEY `username` (`username`),
   ADD KEY `role_id` (`role_id`);
 
 --
@@ -163,7 +178,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
