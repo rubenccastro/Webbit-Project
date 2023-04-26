@@ -9,21 +9,25 @@ CREATE TABLE Roles (
   role VARCHAR(255) NOT NULL
 ); 
 
+INSERT INTO `roles`(`id`, `role`) VALUES ('1','Member');
+
 CREATE TABLE Users (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  user VARCHAR(16) NOT NULL UNIQUE,
-  password VARCHAR(16) NOT NULL,
+  username VARCHAR(16) NOT NULL UNIQUE,
+  pwd VARCHAR(16) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  karmapoints INT NULL,
+  karmapoints INT NOT NULL DEFAULT 0,
   description VARCHAR(255) NULL,
   country VARCHAR(255) NULL,
-  role_id INT NOT NULL,
+  role_id INT NOT NULL DEFAULT 1,
+  created_in DATETIME NOT NULL,
+  updated_in DATETIME NOT NULL,
   FOREIGN KEY (role_id) REFERENCES Roles(id)
 ); 
 
 CREATE TABLE Category (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  title VARCHAR(16) NOT NULL,
+  title VARCHAR(16) NOT NULL
 ); 
 
 CREATE TABLE Posts (
