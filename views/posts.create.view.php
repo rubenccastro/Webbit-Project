@@ -24,7 +24,7 @@
             <div class="row md">
                 <div class="col">
                     <?php if (isset($_SESSION["userid"])) { ?>
-                        <form method="POST" action="<?php echo route('category'); ?>">
+                        <form method="POST" action="<?php echo route('posts'); ?>">
                             <table class="table-borderless table-custom">
                                 <tr>
                                     <td class="text">
@@ -34,45 +34,32 @@
                                 <tr>
                                     <td>
                                         <div class="container-fluid ps-0">
-                                            <ul class="category-selector">
-                                                <li class="dropdown-center">
-                                                    <button class="mainframe-selector nav-link dropdown-toggle text-nowrap"
-                                                        type="button" id="categoryDropdownButton" data-bs-toggle="dropdown"
-                                                        aria-expanded="false">
-                                                        <span>Select a Category</span>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-category-select">
-                                                        <div class="mainframe-filter">
-                                                            <div
-                                                                class="bg-dark-filter search-form mt-2 mb-2 rounded-1 me-3">
-                                                                <input type="text" id="myInput"
-                                                                    class="form-control-search-home"
-                                                                    onkeyup="searchBarPost()"
-                                                                    placeholder="Search for Categories...">
-                                                            </div>
-                                                        </div>
-                                                        <ul aria-labelledby="categoryDropdownButton"
-                                                            id="categoryDropdownMenu">
-                                                            <li> <a class="dropdown-item item-selector active"
-                                                                    data-value="Select a Category" name="category_id">
+                                            <div class="category-selector">
+                                                <div class="dropdown-center">
+                                                    <select class="mainframe-selector nav-link dropdown-toggle text-nowrap"
+                                                        name="category_id">
+                                                        <div class="dropdown-menu dropdown-menu-category-select">
+                                                            <option> <a class="dropdown-item item-selector active"
+                                                                    data-value="Select a Category">
                                                                     Select a Category</a>
                                                                 <hr class="dropdown-divider">
-                                                            </li>
+                                                            </option>
                                                             <?php
                                                             foreach ($categories as $category) {
                                                                 ?>
-                                                                <li> <a class="dropdown-item item-selector"
-                                                                        data-value="<?php echo $category->title; ?>">
-                                                                        w/<?php echo $category->title; ?></a>
+                                                                <option class="dropdown-item item-selector"
+                                                                    value="<?php echo $category->id; ?>">
+                                                                    <?php echo $category->title; ?>
+                                                                    </a>
                                                                     <hr class="dropdown-divider">
-                                                                </li>
+                                                                </option>
                                                                 <?php
                                                             }
                                                             ?>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                                                        </div>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -93,7 +80,7 @@
                                                 </div>
                                             </div>
                                             <div class="ms-5 me-5">
-                                                <textarea name="" id="editor" class="text-area" name="text"></textarea>
+                                                <textarea id="editor" class="text-area" name="text"></textarea>
                                             </div>
                                         </td>
                                     </tr>

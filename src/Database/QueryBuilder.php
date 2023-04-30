@@ -17,6 +17,12 @@ class QueryBuilder
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
     }
+    public function getAllPosts($table, $class = "StdClass")
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM $table ORDER BY $table.id DESC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
+    }
     public function deleteById($table, $id)
     {
         $stmt = $this->pdo->prepare("DELETE FROM $table WHERE id=:id");
@@ -95,4 +101,6 @@ class QueryBuilder
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
     }
+
+
 }

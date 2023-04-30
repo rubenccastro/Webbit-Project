@@ -63,41 +63,52 @@
                         <?php
                     }
                     ?>
-                    <table class="table-borderless table-custom" id="posts">
-                        <tr class="mainframe-body mt-2 mb-2 ms-3">
-                            <td class="mainframe-upvote col-md-1-5 w-5 mh-100 align-top">
-                                <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
-                                <label class="btn btn-outline-warning" for="option1"><i
-                                        class="fa-solid fa-arrow-up"></i></label>
-                                <p class="text textupvote text-center">100</p>
-                                <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
-                                <label class="btn btn-outline-warning" for="option2"><i
-                                        class="fa-solid fa-arrow-down"></i></label>
-                            </td>
-                            <td class="col-md-10 ms-2" onclick="window.location='';">
-                                <div class="text-category"><img src="<?php echo route('assets/favicon.png') ?>"
-                                        class="rounded-circle me-2" width="20px" height="20px"><a class="text"
-                                        href="">w/category</a>
-                                    <span class="text-inf text-align-center">Posted by <a class="text"
-                                            href="">u/Testuser</a></span>
+                    <?php
+                    foreach ($posts as $post) {
+                        ?>
+                        <table class="table-borderless table-custom" id="posts">
+                            <tr class="mainframe-body mt-2 mb-2 ms-3">
+                                <td class="mainframe-upvote col-md-1-5 w-5 mh-100 align-top">
+                                    <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off">
+                                    <label class="btn btn-outline-warning" for="option1"><i
+                                            class="fa-solid fa-arrow-up"></i></label>
+                                    <p class="text textupvote text-center">
+                                        <?php echo $post->karmapoints; ?>
+                                    </p>
+                                    <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+                                    <label class="btn btn-outline-warning" for="option2"><i
+                                            class="fa-solid fa-arrow-down"></i></label>
+                                </td>
+                                <td class="col-md-10 ms-2" onclick="window.location='';">
+                                    <div class="text-category"><img src="<?php echo route('assets/favicon.png') ?>"
+                                            class="rounded-circle me-2" width="20px" height="20px"><a class="text"
+                                            href="">w/<?php echo $post->category_id; ?></a>
+                                        <span class="text-inf text-align-center">Posted by <a class="text"
+                                                href="">u/<?php echo $post->user_id; ?></a> <a class="text-inf"
+                                                href=""><?php echo $post->created_in; ?></a></span>
 
 
-                                </div>
-                                <div class="text text-title me-2 fw-bold">
-                                    TitleTitleTitleTitleTitleTitleTitle
-                                </div>
-                                <p class="text-break text text-body fade-text">
-                                    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="spacer-20"></div>
-                            </td>
-                        </tr>
-                    </table>
+                                    </div>
+                                    <div>
+                                        <span class="text text-title me-2 fw-bold">
+                                            <?php echo $post->title; ?>
+                                        </span>
+                                    </div>
+                                    <p class="text-break text text-body fade-text">
+                                        <?php echo $post->text; ?>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="spacer-20"></div>
+                                </td>
+                            </tr>
+                        </table>
 
+                        <?php
+                    }
+                    ?>
                 </div>
                 <div class="col-md-3">
                     <div class="mainframe-footer ">
