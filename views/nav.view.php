@@ -103,7 +103,7 @@
                                     <p class="dropdown-item disabled text mb-n10"><i class="fa-regular fa-user"></i> My
                                         Stuff
                                     </p>
-                                    <a href="<?php echo route(''); ?>" class="dropdown-item ">
+                                    <a href="<?php echo route(''); ?>" class="dropdown-item">
                                         <span class="ms-5">Profile</span>
                                     </a>
                                     <hr class="dropdown-divider">
