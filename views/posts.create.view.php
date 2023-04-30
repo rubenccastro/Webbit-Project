@@ -54,7 +54,7 @@
                                                         <ul aria-labelledby="categoryDropdownButton"
                                                             id="categoryDropdownMenu">
                                                             <li> <a class="dropdown-item item-selector active"
-                                                                    data-value="Select a Category">
+                                                                    data-value="Select a Category" name="category_id">
                                                                     Select a Category</a>
                                                                 <hr class="dropdown-divider">
                                                             </li>
@@ -89,11 +89,11 @@
                                             <div class="mainframe-inputs ms-5 me-5">
                                                 <div class="container-fluid">
                                                     <input class="category-form " type="text" placeholder="Title"
-                                                        name="category">
+                                                        name="title">
                                                 </div>
                                             </div>
                                             <div class="ms-5 me-5">
-                                                <textarea name="" id="editor" class="text-area"></textarea>
+                                                <textarea name="" id="editor" class="text-area" name="text"></textarea>
                                             </div>
                                         </td>
                                     </tr>
