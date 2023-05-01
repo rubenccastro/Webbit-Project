@@ -36,22 +36,22 @@
                                         <div class="container-fluid ps-0">
                                             <div class="category-selector">
                                                 <div class="dropdown-center">
-                                                    <select class="mainframe-selector nav-link dropdown-toggle text-nowrap"
+                                                    <select
+                                                        class="mainframe-selector nav-link dropdown-toggle text-nowrap px-3"
                                                         name="category_id">
                                                         <div class="dropdown-menu dropdown-menu-category-select">
-                                                            <option> <a class="dropdown-item item-selector active"
+                                                            <option> <a
+                                                                    class="dropdown-item item-selector active  text-nowrap"
                                                                     data-value="Select a Category">
                                                                     Select a Category</a>
-                                                                <hr class="dropdown-divider">
                                                             </option>
                                                             <?php
                                                             foreach ($categories as $category) {
                                                                 ?>
-                                                                <option class="dropdown-item item-selector"
+                                                                <option class="dropdown-item item-selector  text-nowrap"
                                                                     value="<?php echo $category->id; ?>">
                                                                     <?php echo $category->title; ?>
                                                                     </a>
-                                                                    <hr class="dropdown-divider">
                                                                 </option>
                                                                 <?php
                                                             }
@@ -74,13 +74,20 @@
                                     <tr>
                                         <td>
                                             <div class="mainframe-inputs ms-5 me-5">
-                                                <div class="container-fluid">
-                                                    <input class="category-form " type="text" placeholder="Title"
-                                                        name="title">
+                                                <div class="container-fluid d-flex mx-auto flex-grow-1">
+                                                    <input class="category-form" type="text" placeholder="Title"
+                                                        name="title" maxlength="50" id="title">
+                                                    <div id="character-counter"
+                                                        class="counterplacement align-middle text-nowrap">
+                                                        <span id="typed-characters" class="text">0</span>
+                                                        <span class="text">/</span>
+                                                        <span id="maximum-characters" class="text">50</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="ms-5 me-5">
-                                                <textarea id="editor" class="text-area" name="text"></textarea>
+                                                <textarea id="text" class="text-area" name="text"
+                                                    placeholder=" Text(Optional)"></textarea>
                                             </div>
                                         </td>
                                     </tr>
@@ -114,7 +121,21 @@
             </div>
         </div>
     </section>
-    <script src="<?php echo route('js/jquery.js') ?>"></script>
+    <script>
+        const textAreaElement = document.querySelector("#title");
+        const typedCharactersElement = document.querySelector("#typed-characters");
+        const maximumCharacters = 50;
+
+        textAreaElement.addEventListener("keydown", (event) => {
+            const typedCharacters = textAreaElement.value.length;
+            if (typedCharacters > maximumCharacters) {
+                return false;
+            }
+            typedCharactersElement.textContent = typedCharacters;
+        });
+
+    </script>
+    <script src="<?php echo route('js/javascript.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

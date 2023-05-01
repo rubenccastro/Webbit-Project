@@ -44,10 +44,16 @@ w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solel
                                     </tr>
                                     <tr class="mainframe-submit">
                                         <td>
-                                            <div class="container-fluid">
-                                                <span class="text border-0">w/</span>
+                                            <div class="container-fluid d-flex mx-auto flex-grow-1">
+                                                <span class="text mtr-04-02">w/</span>
                                                 <input class="category-form " type="text" placeholder="Category Name"
-                                                    name="category">
+                                                    name="category" maxlength="16" id="category">
+                                                <div id="character-counter-category"
+                                                    class="counterplacement align-middle text-nowrap">
+                                                    <span id="typed-characters-category" class="text">0</span>
+                                                    <span class="text">/</span>
+                                                    <span id="maximum-characters-category" class="text">16</span>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -84,6 +90,20 @@ w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solel
                 </div>
             </div>
     </section>
+    <script>
+        const textAreaCategory = document.querySelector("#category");
+        const typedCharactersCategory = document.querySelector("#typed-characters-category");
+        const maxCharactersCategory = 16;
+
+        textAreaCategory.addEventListener("keydown", (event) => {
+            const typedCharacters = textAreaCategory.value.length;
+            if (typedCharacters > maxCharactersCategory) {
+                return false;
+            }
+            typedCharactersCategory.textContent = typedCharacters;
+        });
+    </script>
+    <script src="<?php echo route('js/javascript.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

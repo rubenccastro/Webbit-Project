@@ -127,7 +127,7 @@
         </nav>
     </section>
     <!-- Nav -->
-    <script src="<?php echo route('js/jquery.js') ?>"></script>
+    <script src="<?php echo route('js/javascript.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>

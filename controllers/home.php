@@ -16,7 +16,7 @@ function getUsername($userId, QueryBuilder $queryBuilder)
     $user = $queryBuilder->findById('users', $userId);
     return $user->username;
 }
-function timeSincePosted($datetime)
+function timeSincePosted($datetime, QueryBuilder $queryBuilder)
 {
     $now = time();
     $created = strtotime($datetime);
@@ -51,7 +51,7 @@ $posts = $queryBuilder->getAllPosts('posts', 'App\Model\Posts');
 foreach ($posts as $post) {
     $post->category_id = getCategoryTitle($post->category_id, $queryBuilder);
     $post->user_id = getUsername($post->user_id, $queryBuilder);
-    $post->created_in = timeSincePosted($post->created_in);
+    $post->created_in = timeSincePosted($post->created_in, $queryBuilder);
 }
 
 require 'views/home.view.php';
