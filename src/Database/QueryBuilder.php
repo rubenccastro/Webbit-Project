@@ -101,6 +101,53 @@ class QueryBuilder
         $stmt->execute(['id' => $id]);
         return $stmt->fetch();
     }
+    public function selectOne($table, $user_id_column, $user_id, $post_id_column, $post_id)
+    {
+        $sql = "SELECT * FROM {$table} WHERE {$user_id_column} = :user_id AND {$post_id_column} = :post_id LIMIT 1";
 
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $statement->bindParam(':post_id', $post_id, PDO::PARAM_INT);
+        $statement->execute();
 
+        return $statement->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function delete($table, ...$conditions)
+    {
+        $sql = "DELETE FROM $table WHERE ";
+
+        $params = [];
+
+        for ($i = 0; $i < count($conditions); $i += 2) {
+            $column = $conditions[$i];
+            $value = $conditions[$i + 1];
+            $sql .= "$column = ? AND ";
+            $params[] = $value;
+        }
+
+        $sql = rtrim($sql, "AND ");
+
+        $statement = $this->pdo->prepare($sql);
+
+        $statement->execute($params);
+
+        return $statement->rowCount();
+    }
+    public function updateWithCompositeKey($table, $key1, $value1, $key2, $value2, $attributes)
+    {
+        $query = "UPDATE {$table} SET ";
+        foreach ($attributes as $key => $attribute) {
+            $query .= "{$key}=:{$key},";
+        }
+        $query = rtrim($query, ",");
+        $query .= " WHERE {$key1}=:{$key1}_value AND {$key2}=:{$key2}_value";
+
+        $attributes[$key1 . '_value'] = $value1;
+        $attributes[$key2 . '_value'] = $value2;
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($attributes);
+        return $stmt->rowCount() == 1;
+    }
 }

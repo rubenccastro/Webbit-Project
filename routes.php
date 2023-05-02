@@ -41,3 +41,7 @@ $router->get('posts/create', function () {
 $router->post('posts', function () {
     require 'controllers/posts/posts.create.php';
 });
+
+$router->post('karma', function () {
+    require 'controllers/karmapoints/submit-vote.php';
+});

@@ -51,3 +51,11 @@ CREATE TABLE Comments (
   FOREIGN KEY (user_id) REFERENCES Users(id),
   FOREIGN KEY (post_id) REFERENCES Posts(id)
 ); 
+
+CREATE TABLE karmapoints(
+  user_id INT NOT NULL,
+  post_id INT NOT NULL,
+  vote_value INT NOT NULL DEFAULT 0,
+  FOREIGN KEY (user_id) REFERENCES Users(id),
+  FOREIGN KEY (post_id) REFERENCES Posts(id)
+)
