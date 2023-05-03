@@ -53,9 +53,10 @@ CREATE TABLE Comments (
 ); 
 
 CREATE TABLE karmapoints(
-  user_id INT NOT NULL,
-  post_id INT NOT NULL,
+  users_id INT NOT NULL,
+  posts_id INT NOT NULL,
   vote_value INT NOT NULL DEFAULT 0,
+  votestate VARCHAR(16) NOT NULL,
   FOREIGN KEY (user_id) REFERENCES Users(id),
   FOREIGN KEY (post_id) REFERENCES Posts(id)
 )

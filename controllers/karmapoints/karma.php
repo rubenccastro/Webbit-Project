@@ -23,17 +23,20 @@ if (isset($_SESSION["userid"])) {
             $newKarmaPoints -= 1;
             $voteValue = -1;
         }
-
+        $currentVoteState = $_POST['voteValue'];
         $votes = [
             'karmapoints' => $newKarmaPoints
         ];
-
+        $votestate = [
+            'votestate' => $currentVoteState
+        ];
         $post = $queryBuilder->update('posts', $postId, $votes);
 
         $queryBuilder->create('karmapoints', [
             'users_id' => $userId,
             'posts_id' => $postId,
-            'vote_value' => $voteValue
+            'vote_value' => $voteValue,
+            'votestate' => $currentVoteState
         ]);
     } else {
         $previousVoteValue = $existingVote->vote_value;
@@ -49,21 +52,21 @@ if (isset($_SESSION["userid"])) {
         }
 
         $currentKarmaPoints += $voteValue - $previousVoteValue;
-
+        $currentVoteState = $_POST['voteValue'];
         $votes = [
             'karmapoints' => $currentKarmaPoints
         ];
-
+        $votestate = [
+            'votestate' => $currentVoteState
+        ];
         $post = $queryBuilder->update('posts', $postId, $votes);
 
         if ($voteValue == 0) {
             $queryBuilder->delete('karmapoints', 'users_id', $userId, 'posts_id', $postId);
         } else {
-            $queryBuilder->updateWithCompositeKey('karmapoints', 'users_id', $userId, 'posts_id', $postId, ['vote_value' => $voteValue]);
+            $queryBuilder->updateWithCompositeKey('karmapoints', 'users_id', $userId, 'posts_id', $postId, ['vote_value' => $voteValue], ['votestate' => $currentVoteState]);
         }
     }
-
-    redirect('');
-} else {
-    redirect('');
+    header('Content-type: application/json; charset=utf-8');
+    echo json_encode($votes);
 }

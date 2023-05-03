@@ -34,13 +34,10 @@ $queryBuilder = new QueryBuilder($connection);
 
 $categories = $queryBuilder->getAll('category', 'App\Model\Category');
 
-$posts = $queryBuilder->getAllPosts('posts', 'App\Model\Posts');
+$posts = $queryBuilder->findById('posts', $id, 'App\Model\Posts');
 
 
-foreach ($posts as $post) {
-    $post->category = $queryBuilder->findById('category', $post->category_id, 'App\Model\Category');
-    $post->users = $queryBuilder->findById('users', $post->user_id, 'App\Model\Users');
-    $post->created_in = timeSincePosted($post->created_in, $queryBuilder);
-}
-
-require 'views/home.view.php';
+$posts->category = $queryBuilder->findById('category', $posts->category_id, 'App\Model\Category');
+$posts->users = $queryBuilder->findById('users', $posts->user_id, 'App\Model\Users');
+$posts->created_in = timeSincePosted($posts->created_in, $queryBuilder);
+require 'views/posts.show.view.php';

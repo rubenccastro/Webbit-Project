@@ -43,5 +43,13 @@ $router->post('posts', function () {
 });
 
 $router->post('karma', function () {
-    require 'controllers/karmapoints/submit-vote.php';
+    require 'controllers/karmapoints/karma.php';
+});
+
+$router->get('w/([a-zA-Z]+)/(\d+)', function ($category, $id) {
+    require 'controllers/posts/posts.show.php';
+});
+
+$router->get('get_user_vote', function ($category, $id) {
+    require '';
 });

@@ -53,52 +53,51 @@
                     <?php
                     foreach ($posts as $post) {
                         ?>
-                        <form method="POST" action="karma" id="karmaposts<?php echo $post->id; ?>">
-                            <table class="table-borderless table-custom" id="posts">
-                                <tr class="mainframe-body mt-2 mb-2 ms-3">
-                                    <td class="mainframe-upvote col-md-1-5 w-5 mh-100 align-top">
-                                        <input type="radio" class="btn-check"
-                                            onclick="submit_form('karmaposts<?php echo $post->id; ?>');" name="voteValue"
-                                            id="upvote<?php echo $post->id; ?>" value="up" autocomplete="off">
-                                        <label class="btn btn-outline-warning" for="upvote<?php echo $post->id; ?>"><i
-                                                class="fa-solid fa-arrow-up"></i></label>
-                                        <p class="text textupvote text-center">
-                                            <?php echo $post->karmapoints; ?>
-                                        </p>
-                                        <input type="radio" class="btn-check"
-                                            onclick="submit_form('karmaposts<?php echo $post->id; ?>');" name="voteValue"
-                                            id="downvote<?php echo $post->id; ?>" value="down" autocomplete="off">
-                                        <label class="btn btn-outline-warning" for="downvote<?php echo $post->id; ?>"><i
-                                                class="fa-solid fa-arrow-down"></i></label>
-                                        <input type="hidden" name="postId" value="<?php echo $post->id; ?>">
-                                    </td>
-                                    <td class="col-md-10 ms-2" onclick="window.location='';">
-                                        <div class="text-category"><img src="<?php echo route('assets/favicon.png') ?>"
-                                                class="rounded-circle me-2" width="20px" height="20px"><a class="text"
-                                                href="">w/<?php echo $post->category_id; ?></a>
-                                            <span class="text-inf text-align-center">Posted by <a class="text" href="">u/
-                                                    <?php echo $post->user_id; ?>
-                                                </a> <a class="text-inf" href="">
-                                                    <?php echo $post->created_in; ?>
-                                                </a></span>
-                                        </div>
-                                        <div>
-                                            <span class="text text-title me-2 fw-bold">
-                                                <?php echo $post->title; ?>
-                                            </span>
-                                        </div>
-                                        <p class="text-break text text-body fade-text">
-                                            <?php echo $post->text; ?>
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="spacer-20"></div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
+                        <table class="table-borderless table-custom" id="posts">
+                            <tr class="mainframe-body mt-2 mb-2 ms-3">
+                                <td class="mainframe-upvote col-md-1-5 w-5 mh-100 align-top">
+                                    <input type="radio" class="btn-check" name="voteValue"
+                                        id="upvote<?php echo $post->id; ?>" value="up" autocomplete="off"
+                                        data-post-id="<?php echo $post->id; ?>">
+                                    <label class="btn btn-outline-warning" for="upvote<?php echo $post->id; ?>"><i
+                                            class="fa-solid fa-arrow-up"></i></label>
+                                    <p class="text textupvote text-center">
+                                        <?php echo $post->karmapoints; ?>
+                                    </p>
+                                    <input type="radio" class="btn-check" name="voteValue"
+                                        id="downvote<?php echo $post->id; ?>" value="down" autocomplete="off"
+                                        data-post-id="<?php echo $post->id; ?>">
+                                    <label class="btn btn-outline-warning" for="downvote<?php echo $post->id; ?>"><i
+                                            class="fa-solid fa-arrow-down"></i></label>
+                                    <input type="hidden" name="postId" value="<?php echo $post->id; ?>">
+                                </td>
+                                <td class="col-md-10 ms-2"
+                                    onclick="window.location='<?php echo route('w/' . $post->category->title . '/' . $post->id); ?>'">
+                                    <div class="text-category"><img src="<?php echo route('assets/favicon.png') ?>"
+                                            class="rounded-circle me-2" width="20px" height="20px"><a class="text"
+                                            href="">w/<?php echo $post->category->title; ?></a>
+                                        <span class="text-inf text-align-center">Posted by <a class="text" href="">u/
+                                                <?php echo $post->users->username; ?>
+                                            </a> <a class="text-inf">
+                                                <?php echo $post->created_in; ?>
+                                            </a></span>
+                                    </div>
+                                    <div>
+                                        <span class="text text-title me-2 fw-bold">
+                                            <?php echo $post->title; ?>
+                                        </span>
+                                    </div>
+                                    <p class="text-break text text-body fade-text">
+                                        <?php echo $post->text; ?>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="spacer-20"></div>
+                                </td>
+                            </tr>
+                        </table>
                         <?php
                     }
                     ?>
@@ -119,16 +118,32 @@
             </div>
         </div>
     </section>
-
     <script>
-        function submit_form(formId) {
-            document.getElementById(formId).submit();
-        }
+        $('input[type=radio][name=voteValue]').on('click', function () {
+            var voteValue = $(this).val();
+            var postId = $(this).attr('data-post-id');
+            var userId = <?php echo $_SESSION['userid']; ?>;
+
+            $.ajax({
+                url: "<?php echo route('karma'); ?>",
+                method: "post",
+                dataType: "json",
+                data: {
+                    postId: postId,
+                    voteValue: voteValue,
+                    userId: userId
+                },
+                success: function (data) {
+                    $('#post-' + postId + ' .textupvote').text(data.karmapoints);
+                    location.reload();
+                }
+            });
+        });
     </script>
     <script src="<?php echo route('js/javascript.js') ?>"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
         integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
         crossorigin="anonymous"></script>

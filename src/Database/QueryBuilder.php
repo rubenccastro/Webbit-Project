@@ -134,12 +134,18 @@ class QueryBuilder
 
         return $statement->rowCount();
     }
-    public function updateWithCompositeKey($table, $key1, $value1, $key2, $value2, $attributes)
+    public function updateWithCompositeKey($table, $key1, $value1, $key2, $value2, $attributes, $extraAttributes = [])
     {
         $query = "UPDATE {$table} SET ";
         foreach ($attributes as $key => $attribute) {
             $query .= "{$key}=:{$key},";
         }
+
+        foreach ($extraAttributes as $key => $attribute) {
+            $query .= "{$key}=:{$key},";
+            $attributes[$key] = $attribute;
+        }
+
         $query = rtrim($query, ",");
         $query .= " WHERE {$key1}=:{$key1}_value AND {$key2}=:{$key2}_value";
 
