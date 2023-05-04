@@ -13,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Input is too long - please enter no more than 16 characters.";
     } else {
         $queryBuilder->create('category', [
-            'title' => $_POST['category']
+            'title' => $_POST['category'],
+            'description' => $_POST['description'],
+            'user_id' => $_SESSION["userid"]
         ]);
     }
 }

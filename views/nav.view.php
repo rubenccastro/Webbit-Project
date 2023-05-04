@@ -51,7 +51,8 @@
                                     foreach ($categories as $category) {
                                         ?>
                                         <li>
-                                            <a href="" class="dropdown-item">
+                                            <a href="<?php echo route('w/' . $category->category->title); ?>"
+                                                class="dropdown-item">
                                                 w/
                                                 <?php echo $category->title; ?>
                                             </a>

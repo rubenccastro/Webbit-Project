@@ -55,7 +55,6 @@ class QueryBuilder
 
         if (!$stmt->execute(array($username))) {
             $stmt = null;
-            header("location: index.php?error=stmtfailed");
             exit();
         }
 
@@ -63,28 +62,24 @@ class QueryBuilder
 
         if (count($passHashed) == 0) {
             $stmt = null;
-            header("location: index.php?error=usernotfound");
         }
 
         $checkPass = password_verify($pwd, $passHashed[0]["pwd"]);
 
         if ($checkPass == false) {
             $stmt = null;
-            header("location: index.php?error=wrongpassword");
             exit();
         } elseif ($checkPass == true) {
             $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username = ? AND pwd = ?;');
 
             if (!$stmt->execute(array($username, $passHashed[0]['pwd']))) {
                 $stmt = null;
-                header("location: index.php?error=stmtfailed");
                 exit();
             }
 
             $username = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if (count($username) == 0) {
                 $stmt = null;
-                header("location: index.php?error=usernotfound");
                 exit();
             }
 
@@ -155,5 +150,21 @@ class QueryBuilder
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($attributes);
         return $stmt->rowCount() == 1;
+    }
+
+    public function findByColumn($table, $column, $value, $intoClass)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM {$table} WHERE {$column} = :value LIMIT 1");
+        $statement->bindValue(':value', $value);
+        $statement->execute();
+        return $statement->fetchObject($intoClass);
+    }
+
+    public function getByColumn($table, $column, $value, $intoClass)
+    {
+        $statement = $this->pdo->prepare("SELECT * FROM {$table} WHERE {$column} = :value ORDER BY $table.id DESC");
+        $statement->bindValue(':value', $value);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS, $intoClass);
     }
 }

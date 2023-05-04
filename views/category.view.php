@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?php echo route('css/login.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/main.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/nav-style.css') ?>">
+    <link rel="stylesheet" href="<?php echo route('css/footer.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -19,62 +20,92 @@
     <?php include 'nav.view.php'
         ?>
     <section>
-        <div>
-            <div class="container">
-                <div class="row md">
-                    <div class="col">
-                        <?php if (isset($_SESSION["userid"])) { ?>
-                            <form method="POST" action="<?php echo route('category'); ?>">
-                                <table class="table-borderless table-custom">
-                                    <tr>
-                                        <td class="text">
-                                            <h3 class="border-bottom">Create a Category</h3>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5 class="text">Name</h5>
-                                            <p class="text-inf mt-n5">Category names including capitalization cannot be
-                                                changed. <span class="hovertext"
-                                                    data-hover='Names cannot have spaces (e.g.,
-w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solely trademarked names (e.g., "w/FansOfWebbit" not "w/Webbit").'>
-                                                    <i class="fa-regular fa-circle-question"></i></span>
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr class="mainframe-submit">
-                                        <td>
-                                            <div class="container-fluid d-flex mx-auto flex-grow-1">
-                                                <span class="text mtr-04-02">w/</span>
-                                                <input class="category-form " type="text" placeholder="Category Name"
-                                                    name="category" maxlength="16" id="category">
-                                                <div id="character-counter-category"
-                                                    class="counterplacement align-middle text-nowrap">
-                                                    <span id="typed-characters-category" class="text">0</span>
-                                                    <span class="text">/</span>
-                                                    <span id="maximum-characters-category" class="text">16</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <button class="bttn bttn-alt mt-2 me-3" type="button">
-                                                <a class="nav-item nav-link text-white"
-                                                    href="<?php echo route(''); ?>">Cancel</a>
-                                            </button>
-                                            <button class=" bttn bttnlogin mt-2" type="submit">
-                                                <span class="nav-item nav-link text-white">Create Category</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </form>
-                            <?php
-                        }
+        <div class="container spacer-20">
+            <div class="row md">
+                <div class="col">
+                    <?php
+                    foreach ($posts as $post) {
                         ?>
+                        <table class="table-borderless table-custom" id="posts">
+                            <tr class="mainframe-body mt-2 mb-2 ms-3">
+                                <td class="mainframe-upvote col-md-1-5 w-5 mh-100 align-top">
+                                    <input type="radio" class="btn-check" name="voteValue"
+                                        id="upvote<?php echo $post->id; ?>" value="up" autocomplete="off"
+                                        data-post-id="<?php echo $post->id; ?>">
+                                    <label class="btn btn-outline-warning" for="upvote<?php echo $post->id; ?>"><i
+                                            class="fa-solid fa-arrow-up"></i></label>
+                                    <p class="text textupvote text-center">
+                                        <?php echo $post->karmapoints; ?>
+                                    </p>
+                                    <input type="radio" class="btn-check" name="voteValue"
+                                        id="downvote<?php echo $post->id; ?>" value="down" autocomplete="off"
+                                        data-post-id="<?php echo $post->id; ?>">
+                                    <label class="btn btn-outline-warning" for="downvote<?php echo $post->id; ?>"><i
+                                            class="fa-solid fa-arrow-down"></i></label>
+                                    <input type="hidden" name="postId" value="<?php echo $post->id; ?>">
+                                </td>
+                                <td class="col-md-10 ms-2"
+                                    onclick="window.location='<?php echo route('w/' . $post->category->title . '/' . $post->id); ?>'">
+                                    <div class="text-category"><a class="text" href="">w/
+                                            <?php echo $post->category->title; ?>
+                                        </a>
+                                        <span class="text-inf text-align-center">Posted by <img
+                                                src="<?php echo route('assets/favicon.png') ?>"
+                                                class="rounded-circle me-1 ms-1" width="15px" height="15px"><a class="text"
+                                                href="">u/
+                                                <?php echo $post->users->username; ?>
+                                            </a> <a class="text-inf">
+                                                <?php echo $post->created_in; ?>
+                                            </a></span>
+                                    </div>
+                                    <div>
+                                        <span class="text-break text text-title me-2 fw-bold">
+                                            <?php echo $post->title; ?>
+                                        </span>
+                                    </div>
+                                    <p class="text-break text text-body fade-text">
+                                        <?php echo $post->text; ?>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="spacer-20"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <div class="col-md-4">
+                    <div class="mainframe-footer">
+                        <div class="footer-control"></div>
+                        <section>
+                            <div class="container">
+                                <h5 class="text border-bottom">
+                                    <a class="text" href="">w/
+                                        <?php echo $post->category->title; ?>
+                                    </a>
+                            </div>
+                            <div class="container">
+                                <p class="text text-body-page">
+                                    <?php echo $post->category->description; ?>
+                                </p>
+                            </div>
+                            <?php if (isset($_SESSION["userid"]) == $post->category->user_id) { ?>
+                                <div class="container">
+                                    <p class="text text-body-page border-top">
+                                        <button class=" bttn bttnlogin" type="submit">
+                                            <span class="nav-item nav-link text-white">Modify Description</span>
+                                        </button>
+                                    </p>
+                                </div>
+                            <?php } ?>
+                        </section>
                     </div>
-                    <div class="col-md-3">
+                    <div class="spacer-15"></div>
+                    <div>
                         <div class="mainframe-footer ">
                             <div class="footer-control"></div>
                             <?php include 'rules.view.php'
@@ -89,24 +120,34 @@ w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solel
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     <script>
-        const textAreaCategory = document.querySelector("#category");
-        const typedCharactersCategory = document.querySelector("#typed-characters-category");
-        const maxCharactersCategory = 16;
+        $('input[type=radio][name=voteValue]').on('click', function () {
+            var voteValue = $(this).val();
+            var postId = $(this).attr('data-post-id');
+            var userId = <?php echo $_SESSION['userid']; ?>;
 
-        textAreaCategory.addEventListener("keydown", (event) => {
-            const typedCharacters = textAreaCategory.value.length;
-            if (typedCharacters > maxCharactersCategory) {
-                return false;
-            }
-            typedCharactersCategory.textContent = typedCharacters;
+            $.ajax({
+                url: "<?php echo route('karma'); ?>",
+                method: "post",
+                dataType: "json",
+                data: {
+                    postId: postId,
+                    voteValue: voteValue,
+                    userId: userId
+                },
+                success: function (data) {
+                    $('#post-' + postId + ' .textupvote').text(data.karmapoints);
+                    location.reload();
+                }
+            });
         });
     </script>
     <script src="<?php echo route('js/javascript.js') ?>"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
         integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
         crossorigin="anonymous"></script>

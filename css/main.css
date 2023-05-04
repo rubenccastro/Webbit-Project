@@ -150,6 +150,7 @@ li {
 
 .text-body {
     margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
     display: block;
     /* or inline-block */
     text-overflow: ellipsis;
@@ -157,6 +158,11 @@ li {
     overflow: hidden;
     max-height: 20rem;
     line-height: 1.5em;
+}
+
+.text-body-page {
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
 }
 
 .mt-n5 {
@@ -179,6 +185,11 @@ section {
 .border-bottom {
     border-color: #303030 !important;
     padding-bottom: 5px !important;
+}
+
+.border-top {
+    border-color: #303030 !important;
+    padding-top: 15px !important;
 }
 
 .text-rules {
@@ -213,7 +224,7 @@ section {
 }
 
 .category-form {
-    width: 70%;
+    width: 100%;
     padding: 0.375rem 0.75rem;
     margin-left: -16px !important;
     font-size: 1rem;
@@ -224,6 +235,23 @@ section {
 }
 
 .category-form:focus {
+    outline: none;
+}
+
+.category-form-description {
+    width: 100% !important;
+    height: 250px !important;
+    padding: 0.375rem 0.75rem;
+    margin-left: -16px !important;
+    font-size: 1rem;
+    font-weight: 40;
+    color: rgb(165, 165, 165);
+    background-color: transparent;
+    border: 1px solid transparent;
+    resize: none;
+}
+
+.category-form-description:focus {
     outline: none;
 }
 
@@ -334,10 +362,15 @@ section {
 
 .counterplacement {
     margin-top: 0.5rem !important;
-    margin-left: 14rem !important;
 }
 
 .mtr-04-02 {
     margin-top: 0.4rem !important;
     margin-right: 0.2rem !important;
+}
+
+@media (max-width: 1200px) {
+    div.col-md-4 {
+        display: none !important;
+    }
 }

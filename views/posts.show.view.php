@@ -43,23 +43,25 @@
                                     <input type="hidden" name="postId" value="<?php echo $posts->id; ?>">
                         </form>
                         </td>
-                        <td class="col-md-10 ms-2"
-                            onclick="window.location='<?php echo route('w/' . $posts->category->title . '/' . $posts->id); ?>'">
-                            <div class="text-category"><img src="<?php echo route('assets/favicon.png') ?>"
-                                    class="rounded-circle me-2" width="20px" height="20px"><a class="text"
-                                    href="">w/<?php echo $posts->category->title; ?></a>
-                                <span class="text-inf text-align-center">Posted by <a class="text" href="">u/
+                        <td class="col-md-10 ms-2">
+                            <div class="text-category"><a class="text"
+                                    href="<?php echo route('w/' . $posts->category->title); ?>">w/
+                                    <?php echo $posts->category->title; ?>
+                                </a>
+                                <span class="text-inf text-align-center">Posted by <img
+                                        src="<?php echo route('assets/favicon.png') ?>" class="rounded-circle me-1 ms-1"
+                                        width="15px" height="15px"><a class="text" href="">u/
                                         <?php echo $posts->users->username; ?>
                                     </a> <a class="text-inf">
                                         <?php echo $posts->created_in; ?>
                                     </a></span>
                             </div>
                             <div>
-                                <span class="text text-title me-2 fw-bold">
+                                <span class="text-break text text-title me-2 fw-bold">
                                     <?php echo $posts->title; ?>
                                 </span>
                             </div>
-                            <p class="text-break text text-body fade-text">
+                            <p class="text-break text text-body-page">
                                 <?php echo $posts->text; ?>
                             </p>
                         </td>
@@ -71,21 +73,48 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-md-3">
-                    <div class="mainframe-footer ">
+                <div class="col-md-4">
+                    <div class="mainframe-footer">
                         <div class="footer-control"></div>
-                        <?php include 'rules.view.php'
-                            ?>
+                        <section>
+                            <div class="container">
+                                <h5 class="text border-bottom">
+                                    <a class="text" href="">w/
+                                        <?php echo $posts->category->title; ?>
+                                    </a>
+                            </div>
+                            <div class="container">
+                                <p class="text text-body-page">
+                                    <?php echo $posts->category->description; ?>
+                                </p>
+                            </div>
+                            <?php if (isset($_SESSION["userid"]) == $posts->category->user_id) { ?>
+                                <div class="container">
+                                    <p class="text text-body-page border-top">
+                                        <button class=" bttn bttnlogin" type="submit">
+                                            <span class="nav-item nav-link text-white">Modify Description</span>
+                                        </button>
+                                    </p>
+                                </div>
+                            <?php } ?>
+                        </section>
                     </div>
                     <div class="spacer-15"></div>
-                    <div class="mainframe-footer ">
-                        <div class="footer-control"></div>
-                        <?php include 'footer.view.php'
-                            ?>
+                    <div>
+                        <div class="mainframe-footer ">
+                            <div class="footer-control"></div>
+                            <?php include 'rules.view.php'
+                                ?>
+                        </div>
+                        <div class="spacer-15"></div>
+                        <div class="mainframe-footer ">
+                            <div class="footer-control"></div>
+                            <?php include 'footer.view.php'
+                                ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <script>

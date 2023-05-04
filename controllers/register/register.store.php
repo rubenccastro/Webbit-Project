@@ -12,4 +12,8 @@ $queryBuilder->create('users', [
     'email' => $_POST['email']
 ]);
 $categories = $queryBuilder->getAll('category', 'App\Model\Category');
+
+foreach ($categories as $category) {
+    $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
+}
 redirect('');

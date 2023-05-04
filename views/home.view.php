@@ -73,17 +73,21 @@
                                 </td>
                                 <td class="col-md-10 ms-2"
                                     onclick="window.location='<?php echo route('w/' . $post->category->title . '/' . $post->id); ?>'">
-                                    <div class="text-category"><img src="<?php echo route('assets/favicon.png') ?>"
-                                            class="rounded-circle me-2" width="20px" height="20px"><a class="text"
-                                            href="">w/<?php echo $post->category->title; ?></a>
-                                        <span class="text-inf text-align-center">Posted by <a class="text" href="">u/
+                                    <div class="text-category"><a class="text"
+                                            href="<?php echo route('w/' . $post->category->title); ?>">w/
+                                            <?php echo $post->category->title; ?>
+                                        </a>
+                                        <span class="text-inf text-align-center">Posted by <img
+                                                src="<?php echo route('assets/favicon.png') ?>"
+                                                class="rounded-circle me-1 ms-1" width="15px" height="15px"><a class="text"
+                                                href="">u/
                                                 <?php echo $post->users->username; ?>
                                             </a> <a class="text-inf">
                                                 <?php echo $post->created_in; ?>
                                             </a></span>
                                     </div>
                                     <div>
-                                        <span class="text text-title me-2 fw-bold">
+                                        <span class="text-break text text-title me-2 fw-bold">
                                             <?php echo $post->title; ?>
                                         </span>
                                     </div>
@@ -102,7 +106,7 @@
                     }
                     ?>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4 example">
                     <div class="mainframe-footer ">
                         <div class="footer-control"></div>
                         <?php include 'rules.view.php'

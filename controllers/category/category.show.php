@@ -34,8 +34,15 @@ $queryBuilder = new QueryBuilder($connection);
 
 $categories = $queryBuilder->getAll('category', 'App\Model\Category');
 
-$posts = $queryBuilder->getAllPosts('posts', 'App\Model\Posts');
+$categoryTitle = $category ?? '';
 
+$category = $queryBuilder->findByColumn('category', 'title', $categoryTitle, 'App\Model\Category');
+if ($category) {
+    $categoryId = $category->id;
+    $posts = $queryBuilder->getByColumn('posts', 'category_id', $categoryId, 'App\Model\Posts');
+} else {
+    $posts = [];
+}
 foreach ($categories as $category) {
     $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
 }
@@ -45,4 +52,4 @@ foreach ($posts as $post) {
     $post->created_in = timeSincePosted($post->created_in, $queryBuilder);
 }
 
-require 'views/home.view.php';
+require 'views/category.view.php';

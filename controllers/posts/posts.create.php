@@ -13,4 +13,9 @@ $queryBuilder->create('posts', [
     'category_id' => $_POST['category_id']
 ]);
 $categories = $queryBuilder->getAll('category', 'App\Model\Category');
+
+foreach ($categories as $category) {
+    $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
+}
+
 redirect('');
