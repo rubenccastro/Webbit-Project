@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <!-- Nav -->
     <section>
 
         <div class="container">
@@ -34,7 +33,6 @@
 
         </div>
     </section>
-    <!-- Nav -->
 </body>
 
 </html>

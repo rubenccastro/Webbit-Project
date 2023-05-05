@@ -1,6 +1,5 @@
 <?php
 
-$appName = 'Webbit';
 date_default_timezone_set('Europe/London');
 use App\Database\Connection;
 use App\Database\QueryBuilder;
@@ -31,7 +30,7 @@ function timeSincePosted($datetime, QueryBuilder $queryBuilder)
 
 $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
-
+$requestedCategoryTitle = $category ?? '';
 $categories = $queryBuilder->getAllAsc('category', 'App\Model\Category');
 
 $posts = $queryBuilder->findById('posts', $id, 'App\Model\Posts');
@@ -41,4 +40,6 @@ $posts->category = $queryBuilder->findById('category', $posts->category_id, 'App
 $posts->users = $queryBuilder->findById('users', $posts->user_id, 'App\Model\Users');
 $posts->created_in = timeSincePosted($posts->created_in, $queryBuilder);
 $karmapoints = $queryBuilder->getAll('karmapoints', 'App\Model\Karmapoints');
+
+$categoryDetails = $queryBuilder->findByColumn('category', 'title', $requestedCategoryTitle, 'App\Model\Category');
 require 'views/posts.show.view.php';

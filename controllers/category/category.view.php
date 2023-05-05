@@ -1,6 +1,5 @@
 <?php
 
-$appName = 'Webbit';
 date_default_timezone_set('Europe/London');
 use App\Database\Connection;
 use App\Database\QueryBuilder;
@@ -36,6 +35,8 @@ $categories = $queryBuilder->getAllAsc('category', 'App\Model\Category');
 
 $categoryTitle = $category ?? '';
 
+$requestedCategoryTitle = $category ?? '';
+
 $category = $queryBuilder->findByColumn('category', 'title', $categoryTitle, 'App\Model\Category');
 if ($category) {
     $categoryId = $category->id;
@@ -43,13 +44,18 @@ if ($category) {
 } else {
     $posts = [];
 }
+
 foreach ($categories as $category) {
     $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
 }
+
 foreach ($posts as $post) {
     $post->category = $queryBuilder->findById('category', $post->category_id, 'App\Model\Category');
     $post->users = $queryBuilder->findById('users', $post->user_id, 'App\Model\Users');
     $post->created_in = timeSincePosted($post->created_in, $queryBuilder);
 }
+
+$categoryDetails = $queryBuilder->findByColumn('category', 'title', $requestedCategoryTitle, 'App\Model\Category');
+
 $karmapoints = $queryBuilder->getAll('karmapoints', 'App\Model\Karmapoints');
 require 'views/category.view.php';

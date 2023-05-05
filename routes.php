@@ -27,7 +27,7 @@ $router->get('logout', function () {
 
 
 $router->get('category', function () {
-    require 'controllers/category/category.php';
+    require 'controllers/category/category.create.view.php';
 });
 
 $router->post('category', function () {
@@ -50,10 +50,14 @@ $router->get('w/([\w\-]+)/(\d+)', function ($category, $id) {
     require 'controllers/posts/posts.show.php';
 });
 
-$router->get('get_user_vote', function ($category, $id) {
-    require '';
+$router->get('w/([\w\-]+)', function ($category) {
+    require 'controllers/category/category.view.php';
 });
 
-$router->get('w/([\w\-]+)', function ($category) {
-    require 'controllers/category/category.show.php';
+$router->get('w/([\w\-]+)/edit', function ($category) {
+    require 'controllers/category/category.update.view.php';
+});
+
+$router->post('category/edit', function () {
+    require 'controllers/category/category.update.php';
 });

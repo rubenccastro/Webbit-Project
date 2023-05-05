@@ -9,8 +9,10 @@ $queryBuilder = new QueryBuilder($connection);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input_text = $_POST['category'];
-    if (strlen($input_text) > 16) {
+    $input_desc = $_POST['description'];
+    if (strlen($input_text) > 16 && strlen($input_desc) > 500) {
         echo "Input is too long - please enter no more than 16 characters.";
+        echo "Description is too long - please enter no more than 500 characters.";
     } else {
         $queryBuilder->create('category', [
             'title' => $_POST['category'],
