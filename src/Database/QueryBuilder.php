@@ -13,6 +13,13 @@ class QueryBuilder
     }
     public function getAll($table, $class = "StdClass")
     {
+        $stmt = $this->pdo->prepare("SELECT * FROM $table");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
+    }
+
+    public function getAllAsc($table, $class = "StdClass")
+    {
         $stmt = $this->pdo->prepare("SELECT * FROM $table ORDER BY $table.id ASC");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, $class);

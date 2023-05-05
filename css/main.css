@@ -374,3 +374,7 @@ section {
         display: none !important;
     }
 }
+
+.vote-active {
+    color: #FF6A29;
+}

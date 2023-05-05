@@ -29,20 +29,72 @@
                         <table class="table-borderless table-custom" id="posts">
                             <tr class="mainframe-body mt-2 mb-2 ms-3">
                                 <td class="mainframe-upvote col-md-1-5 w-5 mh-100 align-top">
-                                    <input type="radio" class="btn-check" name="voteValue"
-                                        id="upvote<?php echo $post->id; ?>" value="up" autocomplete="off"
-                                        data-post-id="<?php echo $post->id; ?>">
-                                    <label class="btn btn-outline-warning" for="upvote<?php echo $post->id; ?>"><i
-                                            class="fa-solid fa-arrow-up"></i></label>
+                                    <?php
+                                    $up = false;
+                                    $down = false;
+                                    foreach ($karmapoints as $karmapoint) {
+                                        if ($karmapoint->votestate == 'up' && $karmapoint->users_id == $_SESSION["userid"] && $karmapoint->posts_id == $post->id) {
+                                            $up = true;
+                                            $down = false;
+                                        } elseif ($karmapoint->votestate == 'down' && $karmapoint->users_id == $_SESSION["userid"] && $karmapoint->posts_id == $post->id) {
+                                            $up = false;
+                                            $down = true;
+                                        }
+                                        ?>
+                                        <?php
+                                    }
+                                    ?>
+                                    <?php if ($up == true) { ?>
+                                        <button class="btn btn-outline-warning upvote-button"
+                                            data-post-id="<?php echo $post->id; ?>">
+                                            <i class="fa-solid fa-arrow-up vote-active"></i>
+                                        </button>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <button class="btn btn-outline-warning upvote-button"
+                                            data-post-id="<?php echo $post->id; ?>">
+                                            <i class="fa-solid fa-arrow-up"></i>
+                                        </button>
+                                        <?php
+                                    }
+                                    ?>
                                     <p class="text textupvote text-center">
                                         <?php echo $post->karmapoints; ?>
                                     </p>
-                                    <input type="radio" class="btn-check" name="voteValue"
-                                        id="downvote<?php echo $post->id; ?>" value="down" autocomplete="off"
-                                        data-post-id="<?php echo $post->id; ?>">
-                                    <label class="btn btn-outline-warning" for="downvote<?php echo $post->id; ?>"><i
-                                            class="fa-solid fa-arrow-down"></i></label>
-                                    <input type="hidden" name="postId" value="<?php echo $post->id; ?>">
+                                    <?php
+                                    $up = false;
+                                    $down = false;
+                                    foreach ($karmapoints as $karmapoint) {
+                                        if ($karmapoint->votestate == 'up' && $karmapoint->users_id == $_SESSION["userid"] && $karmapoint->posts_id == $post->id) {
+                                            $up = true;
+                                            $down = false;
+                                        } elseif ($karmapoint->votestate == 'down' && $karmapoint->users_id == $_SESSION["userid"] && $karmapoint->posts_id == $post->id) {
+                                            $up = false;
+                                            $down = true;
+                                        }
+                                        ?>
+                                        <?php
+                                    }
+                                    ?>
+                                    <?php if ($down == true) { ?>
+
+                                        <button class="btn btn-outline-warning downvote-button"
+                                            data-post-id="<?php echo $post->id; ?>"
+                                            data-user-vote="<?php echo $post->user_vote; ?>">
+                                            <i class="fa-solid fa-arrow-down vote-active"></i>
+                                        </button>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <button class="btn btn-outline-warning downvote-button"
+                                            data-post-id="<?php echo $post->id; ?>"
+                                            data-user-vote="<?php echo $post->user_vote; ?>">
+                                            <i class="fa-solid fa-arrow-down"></i>
+                                        </button>
+                                        <?php
+                                    }
+                                    ?>
                                 </td>
                                 <td class="col-md-10 ms-2"
                                     onclick="window.location='<?php echo route('w/' . $post->category->title . '/' . $post->id); ?>'">
@@ -123,8 +175,10 @@
         </div>
     </section>
     <script>
-        $('input[type=radio][name=voteValue]').on('click', function () {
-            var voteValue = $(this).val();
+        $('.upvote-button, .downvote-button').on('click', function (event) {
+            event.preventDefault();
+
+            var voteValue = $(this).hasClass('upvote-button') ? 'up' : 'down';
             var postId = $(this).attr('data-post-id');
             var userId = <?php echo $_SESSION['userid']; ?>;
 
@@ -138,8 +192,22 @@
                     userId: userId
                 },
                 success: function (data) {
-                    $('#post-' + postId + ' .textupvote').text(data.karmapoints);
-                    location.reload();
+                    $(event.target).closest('.mainframe-upvote').find('.textupvote').text(data.karmapoints);
+
+                    var upvoteIcon = $(event.target).closest('.mainframe-upvote').find('.upvote-button i');
+                    var downvoteIcon = $(event.target).closest('.mainframe-upvote').find('.downvote-button i');
+
+                    if (voteValue === 'up') {
+                        upvoteIcon.toggleClass('vote-active');
+                        if (downvoteIcon.hasClass('vote-active')) {
+                            downvoteIcon.removeClass('vote-active');
+                        }
+                    } else if (voteValue === 'down') {
+                        downvoteIcon.toggleClass('vote-active');
+                        if (upvoteIcon.hasClass('vote-active')) {
+                            upvoteIcon.removeClass('vote-active');
+                        }
+                    }
                 }
             });
         });

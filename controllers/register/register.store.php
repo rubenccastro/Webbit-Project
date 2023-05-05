@@ -11,7 +11,7 @@ $queryBuilder->create('users', [
     'pwd' => password_hash($_POST['password'], PASSWORD_DEFAULT),
     'email' => $_POST['email']
 ]);
-$categories = $queryBuilder->getAll('category', 'App\Model\Category');
+$categories = $queryBuilder->getAllAsc('category', 'App\Model\Category');
 
 foreach ($categories as $category) {
     $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');

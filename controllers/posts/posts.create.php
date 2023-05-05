@@ -12,7 +12,7 @@ $queryBuilder->create('posts', [
     'user_id' => $_SESSION["userid"],
     'category_id' => $_POST['category_id']
 ]);
-$categories = $queryBuilder->getAll('category', 'App\Model\Category');
+$categories = $queryBuilder->getAllAsc('category', 'App\Model\Category');
 
 foreach ($categories as $category) {
     $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');

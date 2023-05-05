@@ -32,7 +32,7 @@ function timeSincePosted($datetime, QueryBuilder $queryBuilder)
 $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
-$categories = $queryBuilder->getAll('category', 'App\Model\Category');
+$categories = $queryBuilder->getAllAsc('category', 'App\Model\Category');
 
 $posts = $queryBuilder->findById('posts', $id, 'App\Model\Posts');
 
@@ -40,4 +40,5 @@ $posts = $queryBuilder->findById('posts', $id, 'App\Model\Posts');
 $posts->category = $queryBuilder->findById('category', $posts->category_id, 'App\Model\Category');
 $posts->users = $queryBuilder->findById('users', $posts->user_id, 'App\Model\Users');
 $posts->created_in = timeSincePosted($posts->created_in, $queryBuilder);
+$karmapoints = $queryBuilder->getAll('karmapoints', 'App\Model\Karmapoints');
 require 'views/posts.show.view.php';
