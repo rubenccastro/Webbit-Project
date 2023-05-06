@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?php echo route('css/login.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/main.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/nav-style.css') ?>">
-    <link rel="stylesheet" href="<?php echo route('css/footer.css') ?>">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -73,8 +73,8 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div class="mainframe-inputs ms-5 me-5">
-                                                <div class="container-fluid d-flex mx-auto flex-grow-1">
+                                            <div class="mainframe-inputs ms-5 me-5 mt-5">
+                                                <div class="container d-flex">
                                                     <input class="category-form" type="text" placeholder="Title"
                                                         name="title" maxlength="50" id="title">
                                                     <div id="character-counter"
@@ -85,15 +85,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="ms-5 me-5">
+                                            <div class="ms-5 me-5 mb-5">
                                                 <textarea id="text" class="text-area" name="text"
-                                                    placeholder=" Text(Optional)"></textarea>
+                                                    placeholder=" Text"></textarea>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <div class="mb-3">
+                                            <div class="mb-5 text-end me-5">
                                                 <button class="bttn bttn-alt ms-5 me-3" type="button">
                                                     <a class="nav-item nav-link text-white"
                                                         href="<?php echo route(''); ?>">Cancel</a>
@@ -133,7 +133,6 @@
             }
             typedCharactersElement.textContent = typedCharacters;
         });
-
     </script>
     <script src="<?php echo route('js/javascript.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
@@ -149,5 +148,4 @@
         integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

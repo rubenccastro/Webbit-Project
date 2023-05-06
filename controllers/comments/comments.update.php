@@ -9,12 +9,10 @@ $queryBuilder = new QueryBuilder($connection);
 
 $input_desc = $_POST['description'];
 $category_id = $_POST['category_id'] ?? '';
+$comment_id = $_POST['comments_id'] ?? '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (strlen($input_desc) > 500) {
-        echo "Description is too long - please enter no more than 500 characters.";
-    } else {
         $category = $queryBuilder->findById('category', $category_id);
-        $queryBuilder->update('category', $category_id, ['description' => $input_desc]);
-    }
+        $queryBuilder->update('comments', $comment_id, ['text' => $input_desc]);
+        $comment = $queryBuilder->findById('comments', $comment_id);
 }
-redirect('w/' . $category->title);
+redirect('w/' . $category->title . '/' . $comment->post_id);

@@ -53,9 +53,8 @@
                                         <li>
                                             <a href="<?php echo route('w/' . $category->category->title); ?>"
                                                 class="dropdown-item">
-                                                w/
-                                                <?php echo $category->title; ?>
-                                            </a>
+                                                w/<?php echo $category->title; ?>
+</a>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <?php
@@ -100,7 +99,8 @@
                                     </span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-user dropdown-menu-end">
-                                    <p class="dropdown-item disabled text mb-n10"><i class="fa-regular fa-user"></i> My
+                                    <p class="dropdown-item disabled mb-n10">
+                                        <i class="fa-regular fa-user"></i> My
                                         Stuff
                                     </p>
                                     <a href="<?php echo route(''); ?>" class="dropdown-item">

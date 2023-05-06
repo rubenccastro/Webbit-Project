@@ -34,7 +34,7 @@
                                     <tr>
                                         <td>
                                             <h5 class="text">Name</h5>
-                                            <p class="text-inf mt-n5">Category names including capitalization cannot be
+                                            <p class="text-inf mt-n8">Category names including capitalization cannot be
                                                 changed. <span class="hovertext"
                                                     data-hover='Names cannot have spaces (e.g.,
 w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solely trademarked names (e.g., "w/FansOfWebbit" not "w/Webbit").'>

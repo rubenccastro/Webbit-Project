@@ -50,6 +50,10 @@ $router->get('w/([\w\-]+)/(\d+)', function ($category, $id) {
     require 'controllers/posts/posts.show.php';
 });
 
+$router->get('w/([\w\-]+)/(\d+)/comment/(\d+)/edit', function ($category, $id, $commentid) {
+    require 'controllers/comments/comments.php';
+});
+
 $router->get('w/([\w\-]+)', function ($category) {
     require 'controllers/category/category.view.php';
 });
@@ -58,6 +62,15 @@ $router->get('w/([\w\-]+)/edit', function ($category) {
     require 'controllers/category/category.update.view.php';
 });
 
-$router->post('category/edit', function () {
-    require 'controllers/category/category.update.php';
+$router->post('comment/edit', function () {
+    require 'controllers/comments/comments.update.php';
+});
+
+$router->post('comment/delete', function () {
+    require 'controllers/comments/comments.delete.php';
+});
+
+
+$router->post('comment/create', function () {
+    require 'controllers/comments/comments.create.php';
 });

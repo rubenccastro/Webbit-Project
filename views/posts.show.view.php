@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?php echo route('css/login.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/main.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/nav-style.css') ?>">
-    <link rel="stylesheet" href="<?php echo route('css/footer.css') ?>">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -24,8 +24,8 @@
             <div class="row md">
                 <div class="col">
                     <table class="table-borderless table-custom" id="posts">
-                        <form method="POST" action="karma" id="karmaposts<?php echo $posts->id; ?>">
-                            <tr class="mainframe-body mt-2 mb-2 ms-3">
+                        <tr class="mainframe-post mt-2 mb-2 ms-3">
+                            <form method="POST" action="karma" id="karmaposts<?php echo $posts->id; ?>">
                                 <td class="mainframe-upvote col-md-1-5 w-5 mh-100 align-top">
                                     <?php if (isset($_SESSION["userid"])) { ?>
                                         <?php
@@ -112,34 +112,81 @@
                                         <?php
                                     }
                                     ?>
-                        </form>
-                        </td>
-                        <td class="col-md-10 ms-2">
-                            <div class="text-category"><a class="text"
-                                    href="<?php echo route('w/' . $posts->category->title); ?>">w/
-                                    <?php echo $posts->category->title; ?>
-                                </a>
-                                <span class="text-inf text-align-center">Posted by <img
-                                        src="<?php echo route('assets/favicon.png') ?>" class="rounded-circle me-1 ms-1"
-                                        width="15px" height="15px"><a class="text" href="">u/
-                                        <?php echo $posts->users->username; ?>
-                                    </a> <a class="text-inf">
-                                        <?php echo $posts->created_in; ?>
-                                    </a></span>
-                            </div>
-                            <div>
-                                <span class="text-break text text-title me-2 fw-bold">
-                                    <?php echo $posts->title; ?>
-                                </span>
-                            </div>
-                            <p class="text-break text text-body-page">
-                                <?php echo $posts->text; ?>
-                            </p>
-                        </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="spacer-20"></div>
+                                </td>
+                            </form>
+                            <td class="col-md-10 ms-2">
+                                <div class="text-category container"><a class="text"
+                                        href="<?php echo route('w/' . $posts->category->title); ?>">w/<?php echo $posts->category->title; ?>
+                                    </a>
+                                    <span class="text-inf text-align-center">Posted by <img
+                                            src="<?php echo route('assets/favicon.png') ?>"
+                                            class="rounded-circle me-1 ms-1" width="15px" height="15px"><a class="text"
+                                            href="">u/<?php echo $posts->users->username; ?>
+                                        </a> <span class="text-inf">
+                                            <?php echo $posts->created_in; ?>
+                                        </span></span>
+                                </div>
+                                <div class="container">
+                                    <span class="text-break text text-title me-2 fw-bold">
+                                        <?php echo $posts->title; ?>
+                                    </span>
+                                    <p class="text-break text text-body-page">
+                                        <?php echo $posts->text; ?>
+                                    </p>
+                                </div>
+                                <div class="container">
+                                    <?php if (isset($_SESSION["userid"])) { ?>
+                                    <?php if ($posts->user_id == ($_SESSION["userid"])) { ?>
+                                        <hr class="border-devider">
+                                        <p class="text-end mb-05"><a href="<?php echo route(''); ?>"
+                                                class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square"></i>
+                                                Edit Post</a><a href="<?php echo route(''); ?>"
+                                                class=" text me-2 btn-posts"><i class="fa-solid fa-trash-can trashcan"></i>
+                                                Delete Post</a></p>
+                                    <?php } ?>
+                                </div>
+                                <div class="container">
+                                    <hr class="border-devider">
+                                        <span class="text">Comment as u/<?php echo $_SESSION["username"]; ?></span>
+                                    <form method="POST" action="<?php echo route('comment/create'); ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
+                                    <input type="hidden" name="category_id" value="<?php echo $category->id; ?>">
+                                        <textarea id="text" class="text-comments" name="text"
+                                            placeholder=" Text"></textarea>
+                                    <div class="text-end">
+                                        <button class=" bttn bttnlogin mb-2" type="submit">
+                                            <span class="nav-item nav-link text-white">Comment</span>
+                                        </button>
+                                    </div>
+                                    </form>
+                                    <?php } ?>
+                                    <div>
+                                    <hr class="border-devider">
+                                    <p class="text">Comments</p>
+                                    <?php foreach ($comments as $comment){ ?>
+                                        <span class="text-inf text-align-center">
+                                        <img src="<?php echo route('assets/favicon.png') ?>" class="rounded-circle me-1 ms-1" width="30px" height="30px">
+                                        <a class="text" href="">u/<?php echo $comment->user->username; ?></a>
+                                        <span class="text-inf"><?php echo $comment->created_in; ?></span>
+                                        <p class="text-comment text-break"><?php echo $comment->text; ?></p>
+                                            <?php if (isset($_SESSION["userid"])) { ?>
+                                                <?php if ($comment->user_id == ($_SESSION["userid"])) { ?>
+                                                    <form method="POST" action="<?php echo route('comment/delete'); ?>">
+                                                        <p class="text-end mb-05 mt-n10"><a href="<?php echo route  ('w/' . $posts->category->title . '/' . $posts->id. '/comment/' . $comment->id). '/edit'; ?>" class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square me-1"></i>Edit Comment</a>
+                                                        <input type="hidden" name="comment_id" value="<?php echo $comment->id; ?>">
+                                                        <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
+                                                        <input type="hidden" name="category_id" value="<?php echo $posts->category->id; ?>">
+                                                        <button type="submit" class="btn-test text ms-2  btn-posts">
+                                                        <i class="fa-solid fa-trash-can trashcan me-1"></i><a>Delete Comment</a>
+                                                        </button>
+                                                        </form>
+                                                        </p>
+                                                <?php } ?>
+                                            <?php } ?>
+                                        </span>
+                                    <?php } ?>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </table>
@@ -150,26 +197,13 @@
                         <section>
                             <div class="container">
                                 <h5 class="text border-bottom">
-                                    <a class="text" href="">w/
-                                        <?php echo $posts->category->title; ?>
-                                    </a>
+                                    <a class="text" href="">w/<?php echo $posts->category->title; ?></a>
                             </div>
                             <div class="container">
-                                <p class="text text-body-page">
+                                <p class="text text-body-page text-break">
                                     <?php echo $posts->category->description; ?>
                                 </p>
                             </div>
-                            <?php if ($categoryDetails->user_id == ($_SESSION["userid"])) { ?>
-                                <div class="container">
-                                    <p class="text text-body-page border-top">
-                                        <button class=" bttn bttnlogin" type="button">
-                                            <a class="nav-item nav-link text-white"
-                                                href="<?php echo route('w/' . $categoryDetails->title . '/edit'); ?>">Modify
-                                                Description</a>
-                                        </button>
-                                    </p>
-                                </div>
-                            <?php } ?>
                         </section>
                     </div>
                     <div class="spacer-15"></div>

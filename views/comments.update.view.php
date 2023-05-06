@@ -24,8 +24,8 @@
                 <div class="row md">
                     <div class="col">
                         <?php if (isset($_SESSION["userid"])) { ?>
-                            <?php if ($categoryDetails->user_id == $_SESSION["userid"]) { ?>
-                                <form method="POST" action="<?php echo route('category/edit'); ?>">
+                            <?php if ($comments->user_id == $_SESSION["userid"]) { ?>
+                                <form method="POST" action="<?php echo route('comment/edit'); ?>">
                                     <table class="table-borderless table-custom">
                                         <tr>
                                             <td class="text">
@@ -45,33 +45,14 @@ w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solel
                                         </tr>
                                         <tr class="mainframe-submit">
                                             <td>
-                                                <div class="container-fluid d-flex mx-auto flex-grow-1">
-                                                    <span class="text mtr-04-02">w/</span>
-                                                    <span class="category-form">
-                                                        <?php echo $categoryDetails->title ?>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="spacer-10"></div>
-                                            </td>
-                                        </tr>
-                                        <tr class="mainframe-submit">
-                                            <td>
                                                 <input type="hidden" name="category_id"
-                                                    value="<?php echo $categoryDetails->id; ?>">
+                                                    value="<?php echo $comments->post_id; ?>">
+                                                <input type="hidden" name="comments_id"
+                                                    value="<?php echo $comments->id; ?>">
                                                 <div class="container-fluid d-flex mx-auto flex-grow-1">
                                                     <textarea class="category-form-description" type="text"
-                                                        placeholder="Description" name="description" maxlength="500"
-                                                        id="description"><?php echo $categoryDetails->description; ?></textarea>
-                                                    <div id="character-counter-description"
-                                                        class="counterplacement align-bottom text-nowrap">
-                                                        <span id="typed-characters-description" class="text">0</span>
-                                                        <span class="text">/</span>
-                                                        <span id="maximum-characters-description" class="text">500</span>
-                                                    </div>
+                                                        placeholder="Description" name="description"
+                                                        id="description"><?php echo $comments->text; ?></textarea>
                                                 </div>
 
                                             </td>
@@ -83,7 +64,7 @@ w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solel
                                                         href="<?php echo route(''); ?>">Cancel</a>
                                                 </button>
                                                 <button class=" bttn bttnlogin mt-2" type="submit">
-                                                    <span class="nav-item nav-link text-white">Update Category</span>
+                                                    <span class="nav-item nav-link text-white">Update Comment</span>
                                                 </button>
                                             </td>
                                         </tr>
@@ -113,22 +94,6 @@ w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solel
             </div>
     </section>
     <script>
-        const textAreaDescription = document.querySelector("#description");
-        const typedCharactersDescription = document.querySelector("#typed-characters-description");
-        const maxCharactersDescription = 500;
-        function updateCharacterCount() {
-            const typedCharacters = textAreaDescription.value.length;
-            if (typedCharacters > maxCharactersDescription) {
-                textAreaDescription.value = textAreaDescription.value.substring(0, maxCharactersDescription);
-            }
-            typedCharactersDescription.textContent = textAreaDescription.value.length;
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            updateCharacterCount();
-        });
-        textAreaDescription.addEventListener("input", (event) => {
-            updateCharacterCount();
-        });
     </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
         integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

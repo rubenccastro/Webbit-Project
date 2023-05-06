@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="<?php echo route('css/login.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/main.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/nav-style.css') ?>">
-    <link rel="stylesheet" href="<?php echo route('css/footer.css') ?>">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -117,17 +117,13 @@
                                 </td>
                                 <td class="col-md-10 ms-2"
                                     onclick="window.location='<?php echo route('w/' . $post->category->title . '/' . $post->id); ?>'">
-                                    <div class="text-category"><a class="text" href="">w/
-                                            <?php echo $post->category->title; ?>
-                                        </a>
+                                    <div class="text-category"><a class="text" href="">w/<?php echo $post->category->title; ?></a>
                                         <span class="text-inf text-align-center">Posted by <img
                                                 src="<?php echo route('assets/favicon.png') ?>"
                                                 class="rounded-circle me-1 ms-1" width="15px" height="15px"><a class="text"
-                                                href="">u/
-                                                <?php echo $post->users->username; ?>
-                                            </a> <a class="text-inf">
+                                                href="">u/<?php echo $post->users->username; ?></a> <span class="text-inf">
                                                 <?php echo $post->created_in; ?>
-                                            </a></span>
+                                            </span></span>
                                     </div>
                                     <div>
                                         <span class="text-break text text-title me-2 fw-bold">
@@ -141,7 +137,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div class="spacer-20"></div>
+                                    <div class="spacer-10"></div>
                                 </td>
                             </tr>
                         </table>
@@ -155,12 +151,10 @@
                         <section>
                             <div class="container">
                                 <h5 class="text border-bottom">
-                                    <a class="text" href="">w/
-                                        <?php echo $categoryDetails->title; ?>
-                                    </a>
+                                    <a class="text" href="">w/<?php echo $categoryDetails->title; ?></a>
                             </div>
                             <div class="container">
-                                <p class="text text-body-page">
+                                <p class="text text-body-page text-break">
                                     <?php echo $categoryDetails->description; ?>
                                 </p>
                             </div>
@@ -202,7 +196,6 @@
             var voteValue = $(this).hasClass('upvote-button') ? 'up' : 'down';
             var postId = $(this).attr('data-post-id');
             var userId = <?php echo $_SESSION['userid']; ?>;
-
             $.ajax({
                 url: "<?php echo route('karma'); ?>",
                 method: "post",
