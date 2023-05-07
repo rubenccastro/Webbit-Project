@@ -25,7 +25,6 @@ $router->get('logout', function () {
     require 'controllers/logout.php';
 });
 
-
 $router->get('category', function () {
     require 'controllers/category/category.create.view.php';
 });
@@ -34,6 +33,13 @@ $router->post('category', function () {
     require 'controllers/category/category.create.php';
 });
 
+$router->get('w/([\w\-]+)', function ($category) {
+    require 'controllers/category/category.view.php';
+});
+
+$router->get('w/([\w\-]+)/edit', function ($category) {
+    require 'controllers/category/category.update.view.php';
+});
 $router->get('posts/create', function () {
     require 'controllers/posts/posts.php';
 });
@@ -42,8 +48,8 @@ $router->post('posts', function () {
     require 'controllers/posts/posts.create.php';
 });
 
-$router->post('karma', function () {
-    require 'controllers/karmapoints/karma.php';
+$router->post('posts/delete', function () {
+    require 'controllers/posts/posts.delete.php';
 });
 
 $router->get('w/([\w\-]+)/(\d+)', function ($category, $id) {
@@ -54,12 +60,8 @@ $router->get('w/([\w\-]+)/(\d+)/comment/(\d+)/edit', function ($category, $id, $
     require 'controllers/comments/comments.php';
 });
 
-$router->get('w/([\w\-]+)', function ($category) {
-    require 'controllers/category/category.view.php';
-});
-
-$router->get('w/([\w\-]+)/edit', function ($category) {
-    require 'controllers/category/category.update.view.php';
+$router->post('comment/create', function () {
+    require 'controllers/comments/comments.create.php';
 });
 
 $router->post('comment/edit', function () {
@@ -71,6 +73,6 @@ $router->post('comment/delete', function () {
 });
 
 
-$router->post('comment/create', function () {
-    require 'controllers/comments/comments.create.php';
+$router->post('karma', function () {
+    require 'controllers/karmapoints/karma.php';
 });

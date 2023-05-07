@@ -174,4 +174,10 @@ class QueryBuilder
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS, $intoClass);
     }
+    public function deleteByColumn($table, $column, $value) {
+        $sql = "DELETE FROM {$table} WHERE {$column} = :value";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':value', $value);
+        $statement->execute();
+    }
 }

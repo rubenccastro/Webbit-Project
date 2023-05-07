@@ -79,10 +79,10 @@
                     <?php if (!isset($_SESSION["userid"])) { ?>
                         <div class="navbar-nav ml-auto text-nowrap">
                             <button class="bttn bttnlogin" type="button"><a href="<?php echo route('login'); ?>"
-                                    class="nav-item nav-link">Log
+                                    class="nav-item nav-link text-white">Log
                                     In</a></button>
                             <button class="bttn" type="button"><a href="<?php echo route('register/create'); ?>"
-                                    class="nav-item nav-link">Register</a></button>
+                                    class="nav-item nav-link text-white">Register</a></button>
                         </div>
                         <?php
                     } else {

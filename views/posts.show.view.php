@@ -138,11 +138,16 @@
                                     <?php if (isset($_SESSION["userid"])) { ?>
                                     <?php if ($posts->user_id == ($_SESSION["userid"])) { ?>
                                         <hr class="border-devider">
-                                        <p class="text-end mb-05"><a href="<?php echo route(''); ?>"
-                                                class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square"></i>
-                                                Edit Post</a><a href="<?php echo route(''); ?>"
-                                                class=" text me-2 btn-posts"><i class="fa-solid fa-trash-can trashcan"></i>
-                                                Delete Post</a></p>
+                                        <form method="POST" action="<?php echo route('posts/delete'); ?>">
+                                                        <p class="text-end mb-05"><a href="" class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square me-1"></i>Edit Post</a>
+                                                        <input type="hidden" name="karmapoint_id" value="<?php echo $karmapoint->id; ?>">
+                                                        <input type="hidden" name="category_id" value="<?php echo $posts->category->id; ?>">
+                                                        <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
+                                                        <button type="submit" class="btn-test text ms-2  btn-posts">
+                                                        <i class="fa-solid fa-trash-can trashcan me-1"></i><a>Delete Post</a>
+                                                        </button>
+                                                        </form>
+                                                        </p>
                                     <?php } ?>
                                 </div>
                                 <div class="container">
