@@ -139,7 +139,7 @@
                                     <?php if ($posts->user_id == ($_SESSION["userid"])) { ?>
                                         <hr class="border-devider">
                                         <form method="POST" action="<?php echo route('posts/delete'); ?>">
-                                                        <p class="text-end mb-05"><a href="" class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square me-1"></i>Edit Post</a>
+                                                        <p class="text-end mb-05"><a href="<?php echo route  ('w/' . $posts->category->title . '/' . $posts->id. '/edit'); ?>" class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square me-1"></i>Edit Post</a>
                                                         <input type="hidden" name="karmapoint_id" value="<?php echo $karmapoint->id; ?>">
                                                         <input type="hidden" name="category_id" value="<?php echo $posts->category->id; ?>">
                                                         <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
@@ -177,7 +177,7 @@
                                             <?php if (isset($_SESSION["userid"])) { ?>
                                                 <?php if ($comment->user_id == ($_SESSION["userid"])) { ?>
                                                     <form method="POST" action="<?php echo route('comment/delete'); ?>">
-                                                        <p class="text-end mb-05 mt-n10"><a href="<?php echo route  ('w/' . $posts->category->title . '/' . $posts->id. '/comment/' . $comment->id). '/edit'; ?>" class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square me-1"></i>Edit Comment</a>
+                                                        <p class="text-end mb-05 mt-n10"><a href="<?php echo route  ('w/' . $posts->category->title . '/' . $posts->id. '/comment/' . $comment->id . '/edit'); ?>" class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square me-1"></i>Edit Comment</a>
                                                         <input type="hidden" name="comment_id" value="<?php echo $comment->id; ?>">
                                                         <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
                                                         <input type="hidden" name="category_id" value="<?php echo $posts->category->id; ?>">

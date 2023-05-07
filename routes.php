@@ -40,6 +40,11 @@ $router->get('w/([\w\-]+)', function ($category) {
 $router->get('w/([\w\-]+)/edit', function ($category) {
     require 'controllers/category/category.update.view.php';
 });
+
+$router->get('w/([\w\-]+)/(\d+)/edit', function ($category, $id) {
+    require 'controllers/posts/posts.update.view.php';
+});
+
 $router->get('posts/create', function () {
     require 'controllers/posts/posts.php';
 });
@@ -48,6 +53,9 @@ $router->post('posts', function () {
     require 'controllers/posts/posts.create.php';
 });
 
+$router->post('posts/edit', function () {
+    require 'controllers/posts/posts.update.php';
+});
 $router->post('posts/delete', function () {
     require 'controllers/posts/posts.delete.php';
 });

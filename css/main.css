@@ -15,10 +15,10 @@ body {
   color: rgb(165, 165, 165) !important;
   margin-left: 2rem !important;
 }
+
 a,
 a:link,
 a:active {
-  color: rgb(165, 165, 165) !important;
   text-decoration: none !important;
 }
 
@@ -263,19 +263,6 @@ section {
 
 .category-form-description:focus {
   outline: none;
-}
-
-.bttnlogin {
-  color: #18181b !important;
-  background-color: #ff6a29 !important;
-  border-radius: 25px !important;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.bttnlogin:hover {
-  background-color: #fa5007 !important;
-  transition: background-color 0.15s ease-in-out;
 }
 
 .bttn {

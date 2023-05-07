@@ -54,7 +54,7 @@
                                             <a href="<?php echo route('w/' . $category->category->title); ?>"
                                                 class="dropdown-item">
                                                 w/<?php echo $category->title; ?>
-</a>
+                                            </a>
                                             <hr class="dropdown-divider">
                                         </li>
                                         <?php
@@ -79,10 +79,10 @@
                     <?php if (!isset($_SESSION["userid"])) { ?>
                         <div class="navbar-nav ml-auto text-nowrap">
                             <button class="bttn bttnlogin" type="button"><a href="<?php echo route('login'); ?>"
-                                    class="nav-item nav-link text-white">Log
+                                    class="nav-item ps-2 pe-2 text-white">Log
                                     In</a></button>
                             <button class="bttn" type="button"><a href="<?php echo route('register/create'); ?>"
-                                    class="nav-item nav-link text-white">Register</a></button>
+                                    class="nav-item ps-2 pe-2 text-white">Register</a></button>
                         </div>
                         <?php
                     } else {
