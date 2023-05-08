@@ -158,6 +158,7 @@
                                     <?php echo $categoryDetails->description; ?>
                                 </p>
                             </div>
+                            <?php if (isset($_SESSION["userid"])) { ?>
                             <?php if ($categoryDetails->user_id == ($_SESSION["userid"])) { ?>
                                 <div class="container">
                                     <p class="text text-body-page border-top">
@@ -168,7 +169,8 @@
                                         </button>
                                     </p>
                                 </div>
-                            <?php } ?>
+                            <?php }?>
+                            <?php }?>
                         </section>
                     </div>
                     <div class="spacer-15"></div>

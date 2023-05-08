@@ -55,7 +55,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <button class=" bttn bttnlogin mt-2 mb-3" type="submit"><a>Register</a></button>
+                                        <button class=" bttn bttnlogin mt-2 mb-3 text-white" type="submit">Register</button>
                                     </td>
                                 </tr>
                             </table>

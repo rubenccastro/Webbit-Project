@@ -13,11 +13,6 @@ if (isset($_POST["submit"])) {
     $username = $_POST["user"];
     $pwd = $_POST["password"];
 
-    if (empty($username) || empty($pwd)) {
-        header("location: index.php?error=emptyinput");
-        exit();
-    }
-
     $queryBuilder->getUsers($username, $pwd);
 
     redirect('');
