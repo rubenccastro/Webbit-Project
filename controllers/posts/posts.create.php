@@ -13,13 +13,13 @@ foreach ($categories as $category) {
 }
 
 
-if(empty($_POST['title']) || empty($_POST['text'] || empty($_POST['category_id']))) {
+if (empty($_POST['title']) || empty($_POST['text'] || empty($_POST['category_id']))) {
     $_SESSION['message'] = "Make sure the inputs are filled!";
     redirect('posts/create');
     exit();
- }else{
+} else {
     $category = $queryBuilder->findById('category', $_POST['category_id'], 'App\Model\Category');
-    if($category < 1){
+    if ($category < 1) {
         $_SESSION['message'] = "Make sure there's a category selected!";
         redirect('posts/create');
         exit();
@@ -31,7 +31,4 @@ if(empty($_POST['title']) || empty($_POST['text'] || empty($_POST['category_id']
         'category_id' => $_POST['category_id']
     ]);
     redirect('');
- }
-
-
-
+}

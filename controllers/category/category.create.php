@@ -7,14 +7,14 @@ $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
 
-    $input_text = $_POST['category'];
-    $input_desc = $_POST['description'];
+$input_text = $_POST['category'];
+$input_desc = $_POST['description'];
 
-if(empty($input_text || $input_desc)){
+if (empty($input_text || $input_desc)) {
     $_SESSION['message'] = "Make sure the inputs are filled!";
     redirect('category');
     exit();
-}else{
+} else {
     if (strlen($input_text) > 16 && strlen($input_desc) > 500) {
         $_SESSION['message'] = "Make sure the category name has less than 16 characters and the description less than 500 characters.";
     } else {

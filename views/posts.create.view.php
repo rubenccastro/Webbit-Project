@@ -88,12 +88,12 @@
                                             <div class="ms-5 me-5 mb-5">
                                                 <textarea id="text" class="text-area" name="text"
                                                     placeholder=" Text"></textarea>
-                                                    <?php if(isset($_SESSION['message'])){ ?>
+                                                <?php if (isset($_SESSION['message'])) { ?>
                                                     <p class="text-white">
-                                                    <?php echo $_SESSION['message']; ?>
+                                                        <?php echo $_SESSION['message']; ?>
                                                     </p>
                                                     <?php unset($_SESSION['message']); ?>
-                                                     <?php } ?>
+                                                <?php } ?>
                                             </div>
                                         </td>
                                     </tr>
@@ -154,4 +154,5 @@
         integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

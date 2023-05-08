@@ -79,12 +79,12 @@ w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solel
                                     </tr>
                                     <tr>
                                         <td>
-                                            <?php if(isset($_SESSION['message'])){ ?>
-                                            <p class="text-white">
-                                                <?php echo $_SESSION['message']; ?>
+                                            <?php if (isset($_SESSION['message'])) { ?>
+                                                <p class="text-white">
+                                                    <?php echo $_SESSION['message']; ?>
                                                 </p>
                                                 <?php unset($_SESSION['message']); ?>
-                                                <?php } ?>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <tr>

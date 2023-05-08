@@ -58,25 +58,23 @@
                                         </tr>
                                         <tr class="mainframe-submit">
                                             <td>
-                                                <input type="hidden" name="post_id"
-                                                    value="<?php echo $posts->id; ?>">
+                                                <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
                                                 <input type="hidden" name="category_id"
                                                     value="<?php echo $posts->category_id; ?>">
                                                 <div class="container-fluid d-flex mx-auto flex-grow-1">
-                                                    <textarea class="category-form-description" type="text"
-                                                        placeholder="text" name="text"
-                                                        id="text"><?php echo $posts->text; ?></textarea>
+                                                    <textarea class="category-form-description" type="text" placeholder="text"
+                                                        name="text" id="text"><?php echo $posts->text; ?></textarea>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <?php if(isset($_SESSION['message'])){ ?>
-                                                <p class="text-white">
-                                                <?php echo $_SESSION['message']; ?>
-                                                </p>
-                                                <?php unset($_SESSION['message']); ?>
-                                                 <?php } ?>
+                                                <?php if (isset($_SESSION['message'])) { ?>
+                                                    <p class="text-white">
+                                                        <?php echo $_SESSION['message']; ?>
+                                                    </p>
+                                                    <?php unset($_SESSION['message']); ?>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                         <tr>

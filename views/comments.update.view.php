@@ -29,18 +29,10 @@
                                     <table class="table-borderless table-custom">
                                         <tr>
                                             <td class="text">
-                                                <h5>Editing your comment on the post <?php echo $post->title; ?></h5>
-                                        <hr class="border-devider">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                            <?php if(isset($_SESSION['message'])){ ?>
-                                            <p class="text-white">
-                                                <?php echo $_SESSION['message']; ?>
-                                            </p>
-                                            <?php unset($_SESSION['message']); ?>
-                                        <?php } ?>
+                                                <h5>Editing your comment on the post
+                                                    <?php echo $post->title; ?>
+                                                </h5>
+                                                <hr class="border-devider">
                                             </td>
                                         </tr>
                                         <tr>
@@ -48,14 +40,23 @@
                                             <td>
                                                 <input type="hidden" name="category_id"
                                                     value="<?php echo $comments->post_id; ?>">
-                                                <input type="hidden" name="comments_id"
-                                                    value="<?php echo $comments->id; ?>">
+                                                <input type="hidden" name="comments_id" value="<?php echo $comments->id; ?>">
                                                 <div class="container-fluid d-flex mx-auto flex-grow-1">
                                                     <textarea class="category-form-description" type="text"
                                                         placeholder="Description" name="description"
                                                         id="description"><?php echo $comments->text; ?></textarea>
                                                 </div>
 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <?php if (isset($_SESSION['message'])) { ?>
+                                                    <p class="text-white">
+                                                        <?php echo $_SESSION['message']; ?>
+                                                    </p>
+                                                    <?php unset($_SESSION['message']); ?>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                         <tr>

@@ -117,7 +117,8 @@
                                 </td>
                                 <td class="col-md-10 ms-2"
                                     onclick="window.location='<?php echo route('w/' . $post->category->title . '/' . $post->id); ?>'">
-                                    <div class="text-category"><a class="text" href="">w/<?php echo $post->category->title; ?></a>
+                                    <div class="text-category"><a class="text" href="">w/<?php echo $post->category->title; ?>
+                                        </a>
                                         <span class="text-inf text-align-center">Posted by <img
                                                 src="<?php echo route('assets/favicon.png') ?>"
                                                 class="rounded-circle me-1 ms-1" width="15px" height="15px"><a class="text"
@@ -151,7 +152,9 @@
                         <section>
                             <div class="container">
                                 <h5 class="text border-bottom">
-                                    <a class="text" href="">w/<?php echo $categoryDetails->title; ?></a>
+                                    <a class="text" href="">w/
+                                        <?php echo $categoryDetails->title; ?>
+                                    </a>
                             </div>
                             <div class="container">
                                 <p class="text text-body-page text-break">
@@ -159,18 +162,18 @@
                                 </p>
                             </div>
                             <?php if (isset($_SESSION["userid"])) { ?>
-                            <?php if ($categoryDetails->user_id == ($_SESSION["userid"])) { ?>
-                                <div class="container">
-                                    <p class="text text-body-page border-top">
-                                        <button class=" bttn bttnlogin" type="button">
-                                            <a class="nav-item nav-link text-white"
-                                                href="<?php echo route('w/' . $categoryDetails->title . '/edit'); ?>">Modify
-                                                Description</a>
-                                        </button>
-                                    </p>
-                                </div>
-                            <?php }?>
-                            <?php }?>
+                                <?php if ($categoryDetails->user_id == ($_SESSION["userid"])) { ?>
+                                    <div class="container">
+                                        <p class="text text-body-page border-top">
+                                            <button class=" bttn bttnlogin" type="button">
+                                                <a class="nav-item nav-link text-white"
+                                                    href="<?php echo route('w/' . $categoryDetails->title . '/edit'); ?>">Modify
+                                                    Description</a>
+                                            </button>
+                                        </p>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
                         </section>
                     </div>
                     <div class="spacer-15"></div>

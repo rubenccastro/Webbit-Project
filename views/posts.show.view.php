@@ -164,12 +164,12 @@
                                             <input type="hidden" name="category_id" value="<?php echo $category->id; ?>">
                                             <textarea id="text" class="text-comments" name="text"
                                                 placeholder=" Text"></textarea>
-                                                <?php if(isset($_SESSION['messagecreatecomment'])){ ?>
-                                            <p class="text-white">
-                                                <?php echo $_SESSION['messagecreatecomment']; ?>
-                                            </p>
-                                            <?php unset($_SESSION['messagecreatecomment']); ?>
-                                        <?php } ?>
+                                            <?php if (isset($_SESSION['messagecreatecomment'])) { ?>
+                                                <p class="text-white">
+                                                    <?php echo $_SESSION['messagecreatecomment']; ?>
+                                                </p>
+                                                <?php unset($_SESSION['messagecreatecomment']); ?>
+                                            <?php } ?>
                                             <div class="text-end">
                                                 <button class=" bttn bttnlogin mb-2" type="submit">
                                                     <span class="nav-item nav-link text-white">Comment</span>

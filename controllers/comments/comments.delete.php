@@ -14,7 +14,7 @@ $post_id = $_POST['post_id'] ?? '';
 $comment = $queryBuilder->findById('comments', $comment_id);
 $category = $queryBuilder->findById('category', $category_id);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if($comment->user_id == ($_SESSION["userid"]) && $comment->post_id == $post_id){
+    if ($comment->user_id == ($_SESSION["userid"]) && $comment->post_id == $post_id) {
         $queryBuilder->deleteById('comments', $comment_id);
     }
 }

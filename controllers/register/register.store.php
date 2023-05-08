@@ -10,30 +10,29 @@ $username = $queryBuilder->findByColumn('users', 'username', $_POST['user'], "St
 $email = $queryBuilder->findByColumn('users', 'email', $_POST['email'], "StdClass");
 
 foreach ($categories as $category) {
-    $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
+   $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
 }
-if(empty($_POST['user']) || empty($_POST['password']) || empty($_POST['email']) || $_POST['confirmpassword']) {
-    $_SESSION['message'] = "Fill in all the inputs";
-    redirect('register/create');
-    exit();
- }elseif (!preg_match("/^[a-zA-Z0-9]*$/", $_POST['user'])){
-    $_SESSION['message'] = "Make sure your username is valid!";
-    redirect('register/create');
-    exit();
- }
-elseif($username || $email){
-    $_SESSION['message'] = "Make sure your username or email is not already in use!";
-    redirect('register/create');
-    exit();
- }elseif ($_POST['password'] !== $_POST['confirmpassword']) {
-    $_SESSION['message'] = "Make sure your password matches!";
-    redirect('register/create');
-    exit();
- } else{
-    $queryBuilder->create('users', [
-        'username' => trim($_POST['user']),
-        'pwd' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-        'email' => $_POST['email']
-    ]);
-    redirect('');
- }
+if (empty($_POST['user']) || empty($_POST['password']) || empty($_POST['email']) || $_POST['confirmpassword']) {
+   $_SESSION['message'] = "Fill in all the inputs";
+   redirect('register/create');
+   exit();
+} elseif (!preg_match("/^[a-zA-Z0-9]*$/", $_POST['user'])) {
+   $_SESSION['message'] = "Make sure your username is valid!";
+   redirect('register/create');
+   exit();
+} elseif ($username || $email) {
+   $_SESSION['message'] = "Make sure your username or email is not already in use!";
+   redirect('register/create');
+   exit();
+} elseif ($_POST['password'] !== $_POST['confirmpassword']) {
+   $_SESSION['message'] = "Make sure your password matches!";
+   redirect('register/create');
+   exit();
+} else {
+   $queryBuilder->create('users', [
+      'username' => trim($_POST['user']),
+      'pwd' => password_hash($_POST['password'], PASSWORD_DEFAULT),
+      'email' => $_POST['email']
+   ]);
+   redirect('');
+}
