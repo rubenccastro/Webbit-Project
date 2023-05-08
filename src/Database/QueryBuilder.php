@@ -58,42 +58,15 @@ class QueryBuilder
 
     public function getUsers($username, $pwd)
     {
-        $stmt = $this->pdo->prepare('SELECT pwd FROM users WHERE username = ?');
-
-        if (!$stmt->execute(array($username))) {
-            $stmt = null;
+        $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username = ?');
+        $stmt->execute([$username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if ($user && password_verify($pwd, $user["pwd"])) {
+            $_SESSION["userid"] = $user["id"];
+            $_SESSION["username"] = $user["username"];
+        } else {
             exit();
-        }
-
-        $passHashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if (count($passHashed) == 0) {
-            $stmt = null;
-        }
-
-        $checkPass = password_verify($pwd, $passHashed[0]["pwd"]);
-
-        if ($checkPass == false) {
-            $stmt = null;
-            exit();
-        } elseif ($checkPass == true) {
-            $stmt = $this->pdo->prepare('SELECT * FROM users WHERE username = ? AND pwd = ?;');
-
-            if (!$stmt->execute(array($username, $passHashed[0]['pwd']))) {
-                $stmt = null;
-                exit();
-            }
-
-            $username = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if (count($username) == 0) {
-                $stmt = null;
-                exit();
-            }
-
-            $_SESSION["userid"] = $username[0]["id"];
-            $_SESSION["username"] = $username[0]["username"];
-
-            $stmt = null;
         }
     }
     public function findById($table, $id, $class = "StdClass")

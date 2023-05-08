@@ -40,6 +40,10 @@ $router->get('w/([\w\-]+)', function ($category) {
 $router->get('w/([\w\-]+)/edit', function ($category) {
     require 'controllers/category/category.update.view.php';
 });
+$router->post('category/edit', function () {
+    require 'controllers/category/category.update.php';
+});
+
 
 $router->get('w/([\w\-]+)/(\d+)/edit', function ($category, $id) {
     require 'controllers/posts/posts.update.view.php';

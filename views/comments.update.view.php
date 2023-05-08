@@ -29,20 +29,21 @@
                                     <table class="table-borderless table-custom">
                                         <tr>
                                             <td class="text">
-                                                <h3 class="border-bottom">Create a Category</h3>
+                                                <h5>Editing your comment on the post <?php echo $post->title; ?></h5>
+                                        <hr class="border-devider">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <h5 class="text">Name</h5>
-                                                <p class="text-inf mt-n8">Category names including capitalization cannot be
-                                                    changed. <span class="hovertext"
-                                                        data-hover='Names cannot have spaces (e.g.,
-w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solely trademarked names (e.g., "w/FansOfWebbit" not "w/Webbit").'>
-                                                        <i class="fa-regular fa-circle-question"></i></span>
-                                                </p>
+                                            <?php if(isset($_SESSION['message'])){ ?>
+                                            <p class="text-white">
+                                                <?php echo $_SESSION['message']; ?>
+                                            </p>
+                                            <?php unset($_SESSION['message']); ?>
+                                        <?php } ?>
                                             </td>
                                         </tr>
+                                        <tr>
                                         <tr class="mainframe-submit">
                                             <td>
                                                 <input type="hidden" name="category_id"

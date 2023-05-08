@@ -30,25 +30,31 @@
                                 </th>
                                 <tr>
                                     <td>
+                                        <?php if(isset($_SESSION['message'])){ ?>
+                                            <p class="text-white">
+                                                <?php echo $_SESSION['message']; ?>
+                                            </p>
+                                            <?php unset($_SESSION['message']); ?>
+                                        <?php } ?>
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control form-size" id="floatingInput"
-                                                placeholder="name" name="user" required>
+                                                placeholder="name" name="user" >
                                             <label for="floatingInput" class="text-size">Username</label>
                                         </div>
                                         <div class="form-floating mb-3">
                                             <input type="password" class="form-control form-size" id="floatingPassword"
-                                                placeholder="Password" name="password" required>
+                                                placeholder="Password" name="password" >
                                             <label for="floatingPassword" class="text-size">Password</label>
                                         </div>
                                         <div class="form-floating mb-3">
                                             <input type="password" class="form-control form-size"
-                                                id="floatingConfirmPassword" placeholder="Password" required>
+                                                id="floatingConfirmPassword" placeholder="Password" name="confirmpassword">
                                             <label for="floatingConfirmPassword" class="text-size">Confirm
                                                 Password</label>
                                         </div>
                                         <div class="form-floating">
                                             <input type="email" class="form-control form-size" id="floatingEmail"
-                                                placeholder="Email" name="email" required>
+                                                placeholder="Email" name="email" >
                                             <label for="floatingEmail" class="text-size">Email</label>
                                         </div>
                                     </td>

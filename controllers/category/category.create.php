@@ -7,12 +7,16 @@ $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $input_text = $_POST['category'];
     $input_desc = $_POST['description'];
+
+if(empty($input_text || $input_desc)){
+    $_SESSION['message'] = "Make sure the inputs are filled!";
+    redirect('category');
+    exit();
+}else{
     if (strlen($input_text) > 16 && strlen($input_desc) > 500) {
-        echo "Input is too long - please enter no more than 16 characters.";
-        echo "Description is too long - please enter no more than 500 characters.";
+        $_SESSION['message'] = "Make sure the category name has less than 16 characters and the description less than 500 characters.";
     } else {
         $queryBuilder->create('category', [
             'title' => $_POST['category'],
@@ -20,5 +24,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'user_id' => $_SESSION["userid"]
         ]);
     }
+    redirect('');
 }
-redirect('');

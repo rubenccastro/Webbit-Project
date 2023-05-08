@@ -79,6 +79,16 @@ w/bookclub" not "w/book club" , must not exceed 16 characters. Avoid using solel
                                     </tr>
                                     <tr>
                                         <td>
+                                            <?php if(isset($_SESSION['message'])){ ?>
+                                            <p class="text-white">
+                                                <?php echo $_SESSION['message']; ?>
+                                                </p>
+                                                <?php unset($_SESSION['message']); ?>
+                                                <?php } ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
                                             <button class="bttn bttn-alt mt-2 me-3" type="button">
                                                 <a class="nav-item nav-link text-white"
                                                     href="<?php echo route(''); ?>">Cancel</a>

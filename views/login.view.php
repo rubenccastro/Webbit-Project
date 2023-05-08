@@ -30,7 +30,12 @@
                                 </th>
                                 <tr>
                                     <td>
-
+                                    <?php if(isset($_SESSION['message'])){ ?>
+                                            <p class="text-white">
+                                                <?php echo $_SESSION['message']; ?>
+                                            </p>
+                                            <?php unset($_SESSION['message']); ?>
+                                        <?php } ?>
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control form-size" id="floatingInput"
                                                 name="user" placeholder="">

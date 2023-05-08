@@ -136,60 +136,86 @@
                                 </div>
                                 <div class="container">
                                     <?php if (isset($_SESSION["userid"])) { ?>
-                                    <?php if ($posts->user_id == ($_SESSION["userid"])) { ?>
-                                        <hr class="border-devider">
-                                        <form method="POST" action="<?php echo route('posts/delete'); ?>">
-                                                        <p class="text-end mb-05"><a href="<?php echo route  ('w/' . $posts->category->title . '/' . $posts->id. '/edit'); ?>" class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square me-1"></i>Edit Post</a>
-                                                        <input type="hidden" name="karmapoint_id" value="<?php echo $karmapoint->id; ?>">
-                                                        <input type="hidden" name="category_id" value="<?php echo $posts->category->id; ?>">
-                                                        <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
-                                                        <button type="submit" class="btn-test text ms-2  btn-posts">
+                                        <?php if ($posts->user_id == ($_SESSION["userid"])) { ?>
+                                            <hr class="border-devider">
+                                            <form method="POST" action="<?php echo route('posts/delete'); ?>">
+                                                <p class="text-end mb-05"><a
+                                                        href="<?php echo route('w/' . $posts->category->title . '/' . $posts->id . '/edit'); ?>"
+                                                        class="text ms-2 btn-posts"><i
+                                                            class="fa-regular fa-pen-to-square me-1"></i>Edit Post</a>
+                                                    <input type="hidden" name="karmapoint_id"
+                                                        value="<?php echo $karmapoint->id; ?>">
+                                                    <input type="hidden" name="category_id"
+                                                        value="<?php echo $posts->category->id; ?>">
+                                                    <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
+                                                    <button type="submit" class="btn-test text ms-2  btn-posts">
                                                         <i class="fa-solid fa-trash-can trashcan me-1"></i><a>Delete Post</a>
-                                                        </button>
-                                                        </form>
-                                                        </p>
-                                    <?php } ?>
-                                </div>
-                                <div class="container">
-                                    <hr class="border-devider">
-                                        <span class="text">Comment as u/<?php echo $_SESSION["username"]; ?></span>
-                                    <form method="POST" action="<?php echo route('comment/create'); ?>">
-                                    <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
-                                    <input type="hidden" name="category_id" value="<?php echo $category->id; ?>">
-                                        <textarea id="text" class="text-comments" name="text"
-                                            placeholder=" Text"></textarea>
-                                    <div class="text-end">
-                                        <button class=" bttn bttnlogin mb-2" type="submit">
-                                            <span class="nav-item nav-link text-white">Comment</span>
-                                        </button>
+                                                    </button>
+                                            </form>
+                                            </p>
+                                        <?php } ?>
                                     </div>
-                                    </form>
+                                    <div class="container">
+                                        <hr class="border-devider">
+                                        <span class="text">Comment as u/<?php echo $_SESSION["username"]; ?>
+                                        </span>
+                                        <form method="POST" action="<?php echo route('comment/create'); ?>">
+                                            <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
+                                            <input type="hidden" name="category_id" value="<?php echo $category->id; ?>">
+                                            <textarea id="text" class="text-comments" name="text"
+                                                placeholder=" Text"></textarea>
+                                                <?php if(isset($_SESSION['messagecreatecomment'])){ ?>
+                                            <p class="text-white">
+                                                <?php echo $_SESSION['messagecreatecomment']; ?>
+                                            </p>
+                                            <?php unset($_SESSION['messagecreatecomment']); ?>
+                                        <?php } ?>
+                                            <div class="text-end">
+                                                <button class=" bttn bttnlogin mb-2" type="submit">
+                                                    <span class="nav-item nav-link text-white">Comment</span>
+                                                </button>
+                                            </div>
+                                        </form>
                                     <?php } ?>
                                     <div>
-                                    <hr class="border-devider">
-                                    <p class="text">Comments</p>
-                                    <?php foreach ($comments as $comment){ ?>
-                                        <span class="text-inf text-align-center">
-                                        <img src="<?php echo route('assets/favicon.png') ?>" class="rounded-circle me-1 ms-1" width="30px" height="30px">
-                                        <a class="text" href="">u/<?php echo $comment->user->username; ?></a>
-                                        <span class="text-inf"><?php echo $comment->created_in; ?></span>
-                                        <p class="text-comment text-break"><?php echo $comment->text; ?></p>
-                                            <?php if (isset($_SESSION["userid"])) { ?>
-                                                <?php if ($comment->user_id == ($_SESSION["userid"])) { ?>
-                                                    <form method="POST" action="<?php echo route('comment/delete'); ?>">
-                                                        <p class="text-end mb-05 mt-n10"><a href="<?php echo route  ('w/' . $posts->category->title . '/' . $posts->id. '/comment/' . $comment->id . '/edit'); ?>" class="text ms-2 btn-posts"><i class="fa-regular fa-pen-to-square me-1"></i>Edit Comment</a>
-                                                        <input type="hidden" name="comment_id" value="<?php echo $comment->id; ?>">
-                                                        <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
-                                                        <input type="hidden" name="category_id" value="<?php echo $posts->category->id; ?>">
-                                                        <button type="submit" class="btn-test text ms-2  btn-posts">
-                                                        <i class="fa-solid fa-trash-can trashcan me-1"></i><a>Delete Comment</a>
-                                                        </button>
+                                        <hr class="border-devider">
+                                        <p class="text">Comments</p>
+                                        <?php foreach ($comments as $comment) { ?>
+                                            <span class="text-inf text-align-center">
+                                                <img src="<?php echo route('assets/favicon.png') ?>"
+                                                    class="rounded-circle me-1 ms-1" width="30px" height="30px">
+                                                <a class="text" href="">u/<?php echo $comment->user->username; ?>
+                                                </a>
+                                                <span class="text-inf">
+                                                    <?php echo $comment->created_in; ?>
+                                                </span>
+                                                <p class="text-comment text-break">
+                                                    <?php echo $comment->text; ?>
+                                                </p>
+                                                <?php if (isset($_SESSION["userid"])) { ?>
+                                                    <?php if ($comment->user_id == ($_SESSION["userid"])) { ?>
+                                                        <form method="POST" action="<?php echo route('comment/delete'); ?>">
+                                                            <p class="text-end mb-05 mt-n10"><a
+                                                                    href="<?php echo route('w/' . $posts->category->title . '/' . $posts->id . '/comment/' . $comment->id . '/edit'); ?>"
+                                                                    class="text ms-2 btn-posts"><i
+                                                                        class="fa-regular fa-pen-to-square me-1"></i>Edit
+                                                                    Comment</a>
+                                                                <input type="hidden" name="comment_id"
+                                                                    value="<?php echo $comment->id; ?>">
+                                                                <input type="hidden" name="post_id"
+                                                                    value="<?php echo $posts->id; ?>">
+                                                                <input type="hidden" name="category_id"
+                                                                    value="<?php echo $posts->category->id; ?>">
+                                                                <button type="submit" class="btn-test text ms-2  btn-posts">
+                                                                    <i class="fa-solid fa-trash-can trashcan me-1"></i><a>Delete
+                                                                        Comment</a>
+                                                                </button>
                                                         </form>
                                                         </p>
+                                                    <?php } ?>
                                                 <?php } ?>
-                                            <?php } ?>
-                                        </span>
-                                    <?php } ?>
+                                            </span>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </td>
@@ -202,7 +228,8 @@
                         <section>
                             <div class="container">
                                 <h5 class="text border-bottom">
-                                    <a class="text" href="">w/<?php echo $posts->category->title; ?></a>
+                                    <a class="text" href="">w/<?php echo $posts->category->title; ?>
+                                    </a>
                             </div>
                             <div class="container">
                                 <p class="text text-body-page text-break">

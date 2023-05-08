@@ -88,6 +88,12 @@
                                             <div class="ms-5 me-5 mb-5">
                                                 <textarea id="text" class="text-area" name="text"
                                                     placeholder=" Text"></textarea>
+                                                    <?php if(isset($_SESSION['message'])){ ?>
+                                                    <p class="text-white">
+                                                    <?php echo $_SESSION['message']; ?>
+                                                    </p>
+                                                    <?php unset($_SESSION['message']); ?>
+                                                     <?php } ?>
                                             </div>
                                         </td>
                                     </tr>

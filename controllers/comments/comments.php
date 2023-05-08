@@ -11,10 +11,9 @@ $categories = $queryBuilder->getAllAsc('category', 'App\Model\Category');
 
 $requestedcommentid = $commentid ?? '';
 
-
 foreach ($categories as $category) {
     $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
 }
 $comments = $queryBuilder->findByColumn('comments', 'id', $requestedcommentid, 'App\Model\Category');
-
+$post = $queryBuilder->findById('posts', $comments->post_id);
 require 'views/comments.update.view.php';
