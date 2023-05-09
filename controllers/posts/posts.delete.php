@@ -9,7 +9,6 @@ $queryBuilder = new QueryBuilder($connection);
 $category_id = $_POST['category_id'] ?? '';
 $comment_id = $_POST['comment_id'] ?? '';
 $post_id = $_POST['post_id'] ?? '';
-$karmapoint_id = $_POST['karmapoint_id'] ?? '';
 
 $posts = $queryBuilder->findById('posts', $post_id);
 $category = $queryBuilder->findById('category', $category_id);

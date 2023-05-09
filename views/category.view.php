@@ -152,8 +152,7 @@
                         <section>
                             <div class="container">
                                 <h5 class="text border-bottom">
-                                    <a class="text" href="">w/
-                                        <?php echo $categoryDetails->title; ?>
+                                    <a class="text" href="<?php echo route('w/' . $category->title); ?>">w/<?php echo $categoryDetails->title; ?>
                                     </a>
                             </div>
                             <div class="container">

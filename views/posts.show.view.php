@@ -143,8 +143,6 @@
                                                         href="<?php echo route('w/' . $posts->category->title . '/' . $posts->id . '/edit'); ?>"
                                                         class="text ms-2 btn-posts"><i
                                                             class="fa-regular fa-pen-to-square me-1"></i>Edit Post</a>
-                                                    <input type="hidden" name="karmapoint_id"
-                                                        value="<?php echo $karmapoint->id; ?>">
                                                     <input type="hidden" name="category_id"
                                                         value="<?php echo $posts->category->id; ?>">
                                                     <input type="hidden" name="post_id" value="<?php echo $posts->id; ?>">
@@ -228,7 +226,7 @@
                         <section>
                             <div class="container">
                                 <h5 class="text border-bottom">
-                                    <a class="text" href="">w/<?php echo $posts->category->title; ?>
+                                    <a class="text" href="<?php echo route('w/' . $posts->category->title); ?>">w/<?php echo $posts->category->title; ?>
                                     </a>
                             </div>
                             <div class="container">
