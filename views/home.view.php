@@ -148,8 +148,7 @@
                                             href="<?php echo route('w/' . $post->category->title); ?>">w/<?php echo $post->category->title; ?></a>
                                         <span class="text-inf text-align-center">Posted by <img
                                                 src="<?php echo route('assets/favicon.png') ?>"
-                                                class="rounded-circle me-1 ms-1" width="15px" height="15px"><a class="text"
-                                                href="">u/<?php echo $post->users->username; ?></a> <span class="text-inf">
+                                                class="rounded-circle me-1 ms-1" width="15px" height="15px"><a class="text">u/<?php echo $post->users->username; ?></a> <span class="text-inf">
                                                 <?php echo $post->created_in; ?>
                                             </span></span>
                                     </div>

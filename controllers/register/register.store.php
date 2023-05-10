@@ -12,12 +12,8 @@ $email = $queryBuilder->findByColumn('users', 'email', $_POST['email'], "StdClas
 foreach ($categories as $category) {
    $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
 }
-if (empty($_POST['user']) || empty($_POST['password']) || empty($_POST['email']) || $_POST['confirmpassword']) {
+if (empty($_POST['user']) || empty($_POST['password']) || empty($_POST['confirmpassword']) || empty($_POST['email'])) {
    $_SESSION['message'] = "Fill in all the inputs";
-   redirect('register/create');
-   exit();
-} elseif (!preg_match("/^[a-zA-Z0-9]*$/", $_POST['user'])) {
-   $_SESSION['message'] = "Make sure your username is valid!";
    redirect('register/create');
    exit();
 } elseif ($username || $email) {

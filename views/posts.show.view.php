@@ -120,8 +120,7 @@
                                     </a>
                                     <span class="text-inf text-align-center">Posted by <img
                                             src="<?php echo route('assets/favicon.png') ?>"
-                                            class="rounded-circle me-1 ms-1" width="15px" height="15px"><a class="text"
-                                            href="">u/<?php echo $posts->users->username; ?>
+                                            class="rounded-circle me-1 ms-1" width="15px" height="15px"><a class="text">u/<?php echo $posts->users->username; ?>
                                         </a> <span class="text-inf">
                                             <?php echo $posts->created_in; ?>
                                         </span></span>
@@ -182,7 +181,7 @@
                                             <span class="text-inf text-align-center">
                                                 <img src="<?php echo route('assets/favicon.png') ?>"
                                                     class="rounded-circle me-1 ms-1" width="30px" height="30px">
-                                                <a class="text" href="">u/<?php echo $comment->user->username; ?>
+                                                <a class="text">u/<?php echo $comment->user->username; ?>
                                                 </a>
                                                 <span class="text-inf">
                                                     <?php echo $comment->created_in; ?>

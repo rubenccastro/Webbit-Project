@@ -99,14 +99,14 @@
                                     </span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-user dropdown-menu-end">
-                                    <p class="dropdown-item disabled mb-n10">
+                                    <!-- <p class="dropdown-item disabled mb-n10">
                                         <i class="fa-regular fa-user"></i> My
                                         Stuff
                                     </p>
-                                    <a href="<?php echo route(''); ?>" class="dropdown-item">
+                                    <a href="" class="dropdown-item">
                                         <span class="ms-5">Profile</span>
                                     </a>
-                                    <hr class="dropdown-divider">
+                                    <hr class="dropdown-divider"> -->
                                     <a href="<?php echo route('category'); ?>" class="dropdown-item"><i
                                             class="fa-regular fa-hashtag"></i> Create a Category</a>
                                     <hr class="dropdown-divider">
