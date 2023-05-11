@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2023 at 03:29 PM
+-- Generation Time: May 11, 2023 at 05:22 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,7 +44,8 @@ INSERT INTO `category` (`id`, `title`, `description`, `user_id`) VALUES
 (3, 'Games', 'Games', 2),
 (4, 'Culture', 'Culture\r\n', 2),
 (5, 'Portugal', 'Portugal', 2),
-(6, 'Sweden', 'SW', 2);
+(6, 'Sweden', 'SW', 2),
+(8, 'Gaming', '', 2);
 
 -- --------------------------------------------------------
 
@@ -222,7 +223,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `comments`
