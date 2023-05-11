@@ -15,5 +15,9 @@ function searchBar() {
         }
     }
 }
-
-
+document.addEventListener('DOMContentLoaded', function () {
+    $("select").select2();
+    $(document).on('mouseenter', '.select2-selection__rendered', function () {
+        $('.select2-selection__rendered').removeAttr('title');
+    });
+});

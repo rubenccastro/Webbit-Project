@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="<?php echo route('css/login.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/main.css') ?>">
     <link rel="stylesheet" href="<?php echo route('css/nav-style.css') ?>">
+    <link rel="stylesheet" href="<?php echo route('css/select2.css') ?>">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -36,21 +38,15 @@
                                         <div class="container-fluid ps-0">
                                             <div class="category-selector">
                                                 <div class="dropdown-center">
-                                                    <select
-                                                        class="mainframe-selector nav-link dropdown-toggle text-nowrap px-3"
-                                                        name="category_id">
-                                                        <div class="dropdown-menu dropdown-menu-category-select">
-                                                            <option> <a
-                                                                    class="dropdown-item item-selector active  text-nowrap"
-                                                                    data-value="Select a Category">
+                                                    <select class="text-nowrap px-3" name="category_id">
+                                                        <div>
+                                                            <option> <a data-value="Select a Category">
                                                                     Select a Category</a>
                                                             </option>
                                                             <?php
                                                             foreach ($categories as $category) {
                                                                 ?>
-                                                                <option class="dropdown-item item-selector  text-nowrap"
-                                                                    value="<?php echo $category->id; ?>">
-                                                                    <?php echo $category->title; ?>
+                                                                <option value="<?php echo $category->id; ?>">w/<?php echo $category->title; ?>
                                                                     </a>
                                                                 </option>
                                                                 <?php
@@ -87,7 +83,7 @@
                                             </div>
                                             <div class="ms-5 me-5 mb-5">
                                                 <textarea id="text" class="text-area" name="text"
-                                                    placeholder=" Text"></textarea>
+                                                    placeholder="Text"></textarea>
                                                 <?php if (isset($_SESSION['message'])) { ?>
                                                     <p class="text-white">
                                                         <?php echo $_SESSION['message']; ?>
@@ -139,6 +135,7 @@
             }
             typedCharactersElement.textContent = typedCharacters;
         });
+
     </script>
     <script src="<?php echo route('js/javascript.js') ?>"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"
@@ -153,6 +150,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
         integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 </body>
 
 </html>

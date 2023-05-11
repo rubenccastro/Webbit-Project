@@ -73,9 +73,9 @@
                     <!-- nav-items lado direito -->
                     <?php if (!isset($_SESSION["userid"])) { ?>
                         <div class="navbar-nav ml-auto text-nowrap">
-                            <button class="bttn bttnlogin" type="button"><a href="<?php echo route('login'); ?>"
-                                    class="nav-item ps-2 pe-2 text-white">Log
-                                    In</a></button>
+                            <a href="<?php echo route('login'); ?>"><button class="bttn bttnlogin" type="button"><span
+                                        class="nav-item ps-2 pe-2 text-white"> Log
+                                        In </span></button></a>
                             <button class="bttn" type="button"><a href="<?php echo route('register/create'); ?>"
                                     class="nav-item ps-2 pe-2 text-white">Register</a></button>
                         </div>

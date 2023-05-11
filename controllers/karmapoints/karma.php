@@ -50,7 +50,6 @@ if (isset($_SESSION["userid"])) {
         } elseif ($_POST['voteValue'] == 'down') {
             $voteValue = ($previousVoteValue == -1) ? 0 : -1;
         }
-
         $currentKarmaPoints += $voteValue - $previousVoteValue;
         $currentVoteState = $_POST['voteValue'];
         $votes = [
