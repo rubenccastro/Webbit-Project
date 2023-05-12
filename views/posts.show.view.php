@@ -220,6 +220,11 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <div class="spacer-15"></div>
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="col-md-4">

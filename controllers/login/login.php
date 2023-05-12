@@ -10,7 +10,7 @@ $categories = $queryBuilder->getAllAsc('category', 'App\Model\Category');
 foreach ($categories as $category) {
     $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
 }
-if ($_SESSION['userid']) {
+if (isset($_SESSION['userid'])) {
     redirect('');
 }
 require 'views/login.view.php';
