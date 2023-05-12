@@ -10,8 +10,10 @@ $queryBuilder = new QueryBuilder($connection);
 $input_text = $_POST['category'];
 $input_desc = $_POST['description'];
 $category = $queryBuilder->findByColumn('category', 'title', $_POST['category'], "StdClass");
-
-if (empty($input_text || $input_desc)) {
+if (!$_SESSION['userid']) {
+    redirect('');
+}
+elseif (empty($input_text || $input_desc)) {
     $_SESSION['message'] = "Make sure the inputs are filled!";
     redirect('category');
     exit();

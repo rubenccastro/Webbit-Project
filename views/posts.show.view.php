@@ -184,8 +184,7 @@
                                             <span class="text-inf text-align-center">
                                                 <img src="<?php echo route('assets/favicon.png') ?>"
                                                     class="rounded-circle me-1 ms-1" width="30px" height="30px">
-                                                <a class="text">u/
-                                                    <?php echo $comment->user->username; ?>
+                                                <a class="text">u/<?php echo $comment->user->username; ?>
                                                 </a>
                                                 <span class="text-inf">
                                                     <?php echo $comment->created_in; ?>

@@ -17,4 +17,7 @@ foreach ($categories as $category) {
 }
 $posts = $queryBuilder->findByColumn('posts', 'id', $requestedpostid, 'App\Model\Posts');
 
+if (!$_SESSION['userid'] || !$posts->user_id == $_SESSION["userid"]) {
+    redirect('');
+}
 require 'views/posts.update.view.php';

@@ -10,11 +10,14 @@ $category_id = $_POST['category_id'] ?? '';
 $comment_id = $_POST['comment_id'] ?? '';
 $post_id = $_POST['post_id'] ?? '';
 
+if (!$_SESSION['userid']) {
+    redirect('');
+}
 
 $comment = $queryBuilder->findById('comments', $comment_id);
 $category = $queryBuilder->findById('category', $category_id);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($comment->user_id == ($_SESSION["userid"]) && $comment->post_id == $post_id) {
+    if ($comment->user_id == ($_SESSION["userid"])) {
         $queryBuilder->deleteById('comments', $comment_id);
     }
 }

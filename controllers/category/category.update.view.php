@@ -16,5 +16,7 @@ foreach ($categories as $category) {
     $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
 }
 $categoryDetails = $queryBuilder->findByColumn('category', 'title', $requestedCategoryTitle, 'App\Model\Category');
-
+if (!$_SESSION['userid']) {
+    redirect('');
+}
 require 'views/category.update.view.php';

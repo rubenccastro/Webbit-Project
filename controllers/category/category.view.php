@@ -56,6 +56,6 @@ foreach ($posts as $post) {
 }
 
 $categoryDetails = $queryBuilder->findByColumn('category', 'title', $requestedCategoryTitle, 'App\Model\Category');
-
 $karmapoints = $queryBuilder->getAll('karmapoints', 'App\Model\Karmapoints');
+
 require 'views/category.view.php';

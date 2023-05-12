@@ -28,4 +28,3 @@ if (empty($_POST['user']) || empty($_POST['password'])) {
         redirect('');
     }
 }
-

@@ -32,10 +32,14 @@ $connection = Connection::make();
 $queryBuilder = new QueryBuilder($connection);
 $requestedCategoryTitle = $category ?? '';
 $categories = $queryBuilder->getAllAsc('category', 'App\Model\Category');
+
 foreach ($categories as $category) {
     $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
 }
 $posts = $queryBuilder->findById('posts', $id, 'App\Model\Posts');
+if (!$posts == $post_id) {
+    redirect('');
+}
 $posts->category = $queryBuilder->findById('category', $posts->category_id, 'App\Model\Category');
 $posts->users = $queryBuilder->findById('users', $posts->user_id, 'App\Model\Users');
 $posts->created_in = timeSincePosted($posts->created_in, $queryBuilder);
@@ -48,4 +52,5 @@ foreach ($comments as $comment) {
 $karmapoints = $queryBuilder->getAll('karmapoints', 'App\Model\Karmapoints');
 
 $categoryDetails = $queryBuilder->findByColumn('category', 'title', $requestedCategoryTitle, 'App\Model\Category');
+
 require 'views/posts.show.view.php';

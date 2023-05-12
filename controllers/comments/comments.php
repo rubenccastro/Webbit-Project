@@ -16,4 +16,8 @@ foreach ($categories as $category) {
 }
 $comments = $queryBuilder->findByColumn('comments', 'id', $requestedcommentid, 'App\Model\Category');
 $post = $queryBuilder->findById('posts', $comments->post_id);
+
+if (!$_SESSION['userid'] || !$comments->user_id == $_SESSION["userid"]) {
+    redirect('');
+}
 require 'views/comments.update.view.php';

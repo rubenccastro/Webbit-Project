@@ -12,6 +12,9 @@ foreach ($categories as $category) {
     $category->category = $queryBuilder->findById('category', $category->id, 'App\Model\Category');
 }
 
+if (!$_SESSION['userid']) {
+    redirect('');
+}
 
 if (empty($_POST['title']) || empty($_POST['text'] || empty($_POST['category_id']))) {
     $_SESSION['message'] = "Make sure the inputs are filled!";
