@@ -68,11 +68,11 @@
                     </ul>
                     <!-- Search Bar nav -->
                     <div class="container-fluid">
-                        <form class="d-flex mx-auto bg-dark rounded-pill p-2 search-form flex-grow-1">
+                        <!-- <form class="d-flex mx-auto bg-dark rounded-pill p-2 search-form flex-grow-1">
                             <span class="text-white-search border-0"><i class="fas fa-search"></i></span>
                             <input class="form-control-search" type="search" placeholder="Search Webbit"
                                 aria-label="Search">
-                        </form>
+                        </form> -->
                     </div>
                     <!-- Search Bar nav -->
                     <!-- nav-items lado direito -->
@@ -99,14 +99,14 @@
                                     </span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-user dropdown-menu-end">
-                                    <p class="dropdown-item disabled mb-n10">
+                                    <!-- <p class="dropdown-item disabled mb-n10">
                                         <i class="fa-regular fa-user"></i> My
                                         Stuff
                                     </p>
                                     <a href="" class="dropdown-item">
                                         <span class="ms-5">Profile</span>
                                     </a>
-                                    <hr class="dropdown-divider">
+                                    <hr class="dropdown-divider"> -->
                                     <a href="<?php echo route('category'); ?>" class="dropdown-item"><i
                                             class="fa-regular fa-hashtag"></i> Create a Category</a>
                                     <hr class="dropdown-divider">
