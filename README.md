@@ -1,4 +1,7 @@
 # Webbit
+<p align="center">
+  <img src="https://i.imgur.com/KuGuJDg.png">
+</p>
 
 Webbit is a social media platform that is heavily influenced by Reddit. However, instead of communities or "subreddits," Webbit organizes content into categories. These categories serve as a way for users to easily find content that they are interested in and engage with other users who share their interests.
 
